@@ -74,10 +74,10 @@ http://res.cloudinary.com/dw5c4jnc3/image/upload/v1551225598/Screen_Shot_2019-02
 ## UI Components
 
 {2 Rails views, one for the Map Page (which includes the image modal), and one for the Images}
-Map
-Image Drop Zone
-Image Modal
-Image Display Page that shows images by filter, such as date, location, etc
+- Map
+- Image Drop Zone
+- Image Modal
+- Image Display Page that shows images by filter, such as date, location, etc
 
 ---
 
