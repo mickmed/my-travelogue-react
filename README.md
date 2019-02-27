@@ -1,9 +1,9 @@
 # Project Overview
 
+
 ## Project Schedule
 
 This schedule will be used to keep track of your progress throughout the week and align with our expectations.  
-
 You are **responsible** for scheduling time with your squad to seek approval for each deliverable by the end of the day
 
 |  Day | Deliverable | Status
@@ -15,71 +15,82 @@ You are **responsible** for scheduling time with your squad to seek approval for
 |Day 5| Initial Clickable Model  | Incomplete
 |Day 6| MVP | Incomplete
 |Day 7| Present | Incomplete
-
+---
 
 ## Project Description
 
 App pins travelers destination on map. User can click on a pin and see photos they've uploaded to that destination.
+---
 
 ## Wireframes
-
+---
 
 ## Priority Matrix
-
+---
 
 
 ### MVP/PostMVP - 5min
 
 The functionality will then be divided into two separate lists: MPV and PostMVP.  Carefully decided what is placed into your MVP as the client will expect this functionality to be implemented upon project completion.  
 
-#### SAMPLE.....
 #### MVP 
 
 - Init App/Database
-- Generate Models and Controllers
 - Render Map to page
-- Pin Images to Map
-- Store Images to DB
-- Store more destinations in DB
+- Generate Models and Controllers for Users, Locations, and Images
+- Add Rails Dropzone Gem for adding Images
+- Add Rails Exif Gem for extraction Lat and Long from metadata
+- Extract Exif data from image and create pin on map
+- Add Image to cloud server and URL to Image Table in DB
+- Make Pin clickable to retrieve image URL and show image and image details
+- Set up user login and auth
+- Build Image Modal
+- Set up Header (w/Navbar), and Footer
+- Build Image Page that only shows Images with filters for date, location, etc...
+- Style pages
 
 #### PostMVP 
 
-- Add Favorites List
+- Add User Favorites List
+- Add User following other User feature
+---
 
 ## Architectural Design
+---
 
-
+---
 
 ## ERD
-
-
+http://res.cloudinary.com/dw5c4jnc3/image/upload/v1551225598/Screen_Shot_2019-02-26_at_6.40.32_PM.png
+---
 
 ## UI Components
 
+{2 Rails views, one for the Map Page (which includes the image modal), and one for the Images}
 Map
+Image Drop Zone
+Image Modal
+Image Display Page that shows images by filter, such as date, location, etc
+---
 
-#### SAMPLE.....
-| Component | Description | 
-| --- | :---: |  
-| Header | This will render the header include the nav | 
-| Home | Single page app will render Map |
-| Images | Seperate page to show images without map |
+Timebox Approximations
 
-
-
-Time frames are also key in the development cycle.  You have limited time to code all phases of the game.  Your estimates can then be used to evalute game possibilities based on time needed and the actual time you have before game must be submitted. It's always best to pad the time by a few hours so that you account for the unknown so add and additional hour or two to each component to play it safe.
-
-#### SAMPLE.....
 | Component | Priority | Estimated Time | Actual Time |
-| Original Plan | Outcome | 
-| Initiate App and Database| .5 | 
-| Generate Models and Controllers| 2 |
-| Research MapBox GL Gem | 2 |
-| Render Basic Map in Page | 1 |
-| Research Image Upload in Rails | 1 |
-| Pin an Image to Map | 2 |
-| Research storing image in Database|
+| Original Plan | Outcome | ||
+| Initiate App and Database| 1 | ||
+| Render and size Map on page| 1 |||
+| Generate Models and Controllers for Users, Locations, and Images| 1 |||
+| Add Rails Dropzone and Exif Gems | 2 |||
+| Extract Exif data from image and create pin on map | 1 |||
+| Add Image to cloud server and URL to Image Table in DB | 1 |||
+| Make Pin clickable to retrieve image URL and show image and image details | 2 |||
+| Set up user login and auth |||
+| Set up Header (w/Navbar), and Footer|||
+| Build Image Modal |||
+| Build Image Page that only shows Images with filters for date, location, etc...|||
+| Style pages|||
 | Total | H | 6hrs| 5hrs | 
+---
 
 ## Helper Functions
 Helper functions should be generic enought that they can be reused in other applications. Use this section to document all helper functions that fall into this category.
@@ -88,7 +99,7 @@ Helper functions should be generic enought that they can be reused in other appl
 | Function | Description | 
 | --- | :---: |  
 | Capitalize | This will capitalize the first letter in a string of text | 
-
+----
 ## Additional Libraries
  Use this section to list all supporting libraries and thier role in the project. 
  
@@ -98,18 +109,17 @@ Helper functions should be generic enought that they can be reused in other appl
 | Ruby on Rails | Main application framework | 
 | MapboxGL | Used to display pics on map | 
 
-
+---
 ## Code Snippet
 
   
-
+---
 
 
 ## Change Log
   
 
-#### SAMPLE.....
-
+---
 
 
 
