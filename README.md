@@ -15,17 +15,21 @@ You are **responsible** for scheduling time with your squad to seek approval for
 |Day 5| Initial Clickable Model  | Incomplete
 |Day 6| MVP | Incomplete
 |Day 7| Present | Incomplete
+
 ---
 
 ## Project Description
 
 App pins travelers destination on map. User can click on a pin and see photos they've uploaded to that destination.
+
 ---
 
 ## Wireframes
+
 ---
 
 ## Priority Matrix
+
 ---
 
 
@@ -53,43 +57,48 @@ The functionality will then be divided into two separate lists: MPV and PostMVP.
 
 - Add User Favorites List
 - Add User following other User feature
+
 ---
 
 ## Architectural Design
+
 ---
 
 ---
 
 ## ERD
 http://res.cloudinary.com/dw5c4jnc3/image/upload/v1551225598/Screen_Shot_2019-02-26_at_6.40.32_PM.png
+
 ---
 
 ## UI Components
 
 {2 Rails views, one for the Map Page (which includes the image modal), and one for the Images}
-Map
-Image Drop Zone
-Image Modal
-Image Display Page that shows images by filter, such as date, location, etc
+- Map
+- Image Drop Zone
+- Image Modal
+- Image Display Page that shows images by filter, such as date, location, etc
+
 ---
 
 Timebox Approximations
 
 | Component | Priority | Estimated Time | Actual Time |
-| Original Plan | Outcome | ||
-| Initiate App and Database| 1 | ||
-| Render and size Map on page| 1 |||
-| Generate Models and Controllers for Users, Locations, and Images| 1 |||
-| Add Rails Dropzone and Exif Gems | 2 |||
-| Extract Exif data from image and create pin on map | 1 |||
-| Add Image to cloud server and URL to Image Table in DB | 1 |||
-| Make Pin clickable to retrieve image URL and show image and image details | 2 |||
-| Set up user login and auth |||
-| Set up Header (w/Navbar), and Footer|||
-| Build Image Modal |||
-| Build Image Page that only shows Images with filters for date, location, etc...|||
-| Style pages|||
-| Total | H | 6hrs| 5hrs | 
+|---|---| ---|---|
+| Initiate App and Database| 1 | 1 ||
+| Render and size Map on page| 2 | 1 | 3 |
+| Generate Models and Controllers for Users, Locations, and Images| 3 | 2 ||
+| Add Rails Dropzone and Exif Gems | 4 | 1 ||
+| Extract Exif data from image and create pin on map | 5 | 5 ||
+| Add Image to cloud server and URL to Image Table in DB | 6 | 5 ||
+| Make Pin clickable to retrieve image URL and show image and image details | 7 | 5 ||
+| Set up user login and auth | 8 | 2 ||
+| Set up Header (w/Navbar), and Footer | 9 | 3 ||
+| Build Image Modal | 10 | 8 | |
+| Build Image Page that only shows Images with filters for date, location, etc...| 11 | 8 ||
+| Style and add UI features, animations, carousel, etc | 12 | 16 | |
+| Total |  | 57 |  | 
+
 ---
 
 ## Helper Functions
