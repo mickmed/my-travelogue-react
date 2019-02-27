@@ -79,7 +79,7 @@ Timebox Approximations
 |---|---| ---|---|
 | Initiate App and Database| 1 | 1 ||
 | Render and size Map on page| 2 | 1 | 3 |
-| Generate Models and Controllers for Users, Locations, and Images| 1 |||
+| Generate Models and Controllers for Users, Locations, and Images| 3 | 2 ||
 | Add Rails Dropzone and Exif Gems | 4 | 1 ||
 | Extract Exif data from image and create pin on map | 5 | 5 ||
 | Add Image to cloud server and URL to Image Table in DB | 6 | 5 ||
