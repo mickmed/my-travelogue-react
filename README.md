@@ -15,17 +15,21 @@ You are **responsible** for scheduling time with your squad to seek approval for
 |Day 5| Initial Clickable Model  | Incomplete
 |Day 6| MVP | Incomplete
 |Day 7| Present | Incomplete
+
 ---
 
 ## Project Description
 
 App pins travelers destination on map. User can click on a pin and see photos they've uploaded to that destination.
+
 ---
 
 ## Wireframes
+
 ---
 
 ## Priority Matrix
+
 ---
 
 
@@ -53,15 +57,18 @@ The functionality will then be divided into two separate lists: MPV and PostMVP.
 
 - Add User Favorites List
 - Add User following other User feature
+
 ---
 
 ## Architectural Design
+
 ---
 
 ---
 
 ## ERD
 http://res.cloudinary.com/dw5c4jnc3/image/upload/v1551225598/Screen_Shot_2019-02-26_at_6.40.32_PM.png
+
 ---
 
 ## UI Components
@@ -71,6 +78,7 @@ Map
 Image Drop Zone
 Image Modal
 Image Display Page that shows images by filter, such as date, location, etc
+
 ---
 
 Timebox Approximations
@@ -90,6 +98,7 @@ Timebox Approximations
 | Build Image Page that only shows Images with filters for date, location, etc...| 11 | 8 ||
 | Style and add UI features, animations, carousel, etc | 16 | 8 | |
 | Total |  | 57 |  | 
+
 ---
 
 ## Helper Functions
