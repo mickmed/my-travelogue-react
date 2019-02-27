@@ -88,8 +88,8 @@ Timebox Approximations
 | Set up Header (w/Navbar), and Footer | 9 | 3 ||
 | Build Image Modal | 10 | 8 | |
 | Build Image Page that only shows Images with filters for date, location, etc...| 11 | 8 ||
-| Style pages| 12 | 8 | |
-| Total | H | |  | 
+| Style and add UI features, animations, carousel, etc | 16 | 8 | |
+| Total |  | 57 |  | 
 ---
 
 ## Helper Functions
