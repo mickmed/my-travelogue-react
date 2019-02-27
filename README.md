@@ -76,6 +76,7 @@ Image Display Page that shows images by filter, such as date, location, etc
 Timebox Approximations
 
 | Component | Priority | Estimated Time | Actual Time |
+|---|---| ---|---|
 | Original Plan | Outcome | ||
 | Initiate App and Database| 1 | ||
 | Render and size Map on page| 1 |||
