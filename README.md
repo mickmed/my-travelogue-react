@@ -77,20 +77,19 @@ Timebox Approximations
 
 | Component | Priority | Estimated Time | Actual Time |
 |---|---| ---|---|
-| Original Plan | Outcome | ||
-| Initiate App and Database| 1 | ||
-| Render and size Map on page| 1 |||
+| Initiate App and Database| 1 | 1 ||
+| Render and size Map on page| 2 | 1 | 3 |
 | Generate Models and Controllers for Users, Locations, and Images| 1 |||
-| Add Rails Dropzone and Exif Gems | 2 |||
-| Extract Exif data from image and create pin on map | 1 |||
-| Add Image to cloud server and URL to Image Table in DB | 1 |||
-| Make Pin clickable to retrieve image URL and show image and image details | 2 |||
-| Set up user login and auth |||
-| Set up Header (w/Navbar), and Footer|||
-| Build Image Modal |||
-| Build Image Page that only shows Images with filters for date, location, etc...|||
-| Style pages|||
-| Total | H | 6hrs| 5hrs | 
+| Add Rails Dropzone and Exif Gems | 4 | 1 ||
+| Extract Exif data from image and create pin on map | 5 | 5 ||
+| Add Image to cloud server and URL to Image Table in DB | 6 | 5 ||
+| Make Pin clickable to retrieve image URL and show image and image details | 7 | 5 ||
+| Set up user login and auth | 8 | 2 ||
+| Set up Header (w/Navbar), and Footer | 9 | 3 ||
+| Build Image Modal | 10 | 8 | |
+| Build Image Page that only shows Images with filters for date, location, etc...| 11 | 8 ||
+| Style pages| 12 | 8 | |
+| Total | H | |  | 
 ---
 
 ## Helper Functions
