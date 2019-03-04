@@ -1,0 +1,12 @@
+.home{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    
+}
+
+.map, .locationsList{
+    padding:2%;
+    width:100%;
+}
+

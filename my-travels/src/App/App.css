@@ -1,1 +1,9 @@
 
+
+.App{
+    height:90vh;
+    width:95vw;
+    background-image: linear-gradient(darkred, purple);
+    margin:0 auto;
+
+}
