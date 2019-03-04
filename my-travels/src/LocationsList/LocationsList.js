@@ -1,12 +1,8 @@
 import React from "react";
 
-// import { Link } from "react-router-dom";
-
 const LocationsList = ({ locations }) => {
-  console.log(locations);
-
   return (
-    <div>
+    <div className="LocationsList">
       {locations &&
         locations.map((location, index) => (
           <div key={index}>

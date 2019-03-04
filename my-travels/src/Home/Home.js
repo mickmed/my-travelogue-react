@@ -37,21 +37,15 @@ class Home extends Component {
   };
 
   render() {
-    //if form submited redirect to the UserPage
-    // if (this.state.submitted) {
-    //   return (
-    //     // <Redirect to={`/artist/${this.props.user.name.replace(" ", "-")}`} />
-    //   );
-    // }
-    //connects to dropzone showing preview
+  
     const { images } = this.state;
     const hasImages = images.length > 0;
     return (
-      <div className="home">
-        <div className="map">
+      <div className="homeComponent">
+        <div className="mapWrapper">
           <Map locations={this.state.locations} />
         </div>
-        <div className="locationsList">
+        <div className="locationsListWrapper">
           <LocationsList locations={this.state.locations} />{" "}
         </div>
       </div>

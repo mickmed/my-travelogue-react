@@ -1,12 +1,17 @@
-.home{
+.homeComponent{
     display:flex;
     flex-direction:row;
     justify-content:space-around;
     
 }
 
-.map, .locationsList{
-    padding:2%;
+.mapWrapper, .locationsListWrapper{
+    margin:2%;
     width:100%;
+}
+
+.locationsListWrapper{
+    background-image: linear-gradient(lightgrey, darkgrey);
+    padding:2%;
 }
 
