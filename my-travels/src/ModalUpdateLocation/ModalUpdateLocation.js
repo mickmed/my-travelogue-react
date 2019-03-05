@@ -24,7 +24,7 @@ class ModalUpdateLocation extends Component {
   };
 
   render() {
-    console.log(this.props)
+    
     const showHideClassName = this.props.show
       ? "modal display-block"
       : "modal display-none";

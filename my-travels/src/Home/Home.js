@@ -16,16 +16,18 @@ class Home extends Component {
       name: "",
       summary: "",
       images: [],
-      submitted: false
+      loading: false
     };
   }
   getLocations = async (req, res) => {
+    console.log("test");
     try {
       const fetchLocations = await Axios("http://localhost:3000/locations");
       console.log(fetchLocations);
       const locations = fetchLocations.data;
       this.setState({
-        locations: locations
+        locations: locations,
+        loading: true
       });
     } catch (err) {
       console.log(err);
@@ -36,18 +38,37 @@ class Home extends Component {
     await this.getLocations();
   };
 
+  // submitted = () => {
+  //   this.setState({submitted:true})
+  //   // this.setState({key:Math(random)})
+  // }
+
+  // componentDidUpdate(prevProps, prevState){
+  //   console.log(prevState.submitted, this.state.submitted)
+  //   prevState.submitted === this.state.submitted && this.forceUpdate()
+  // }
+
   render() {
-  
+    console.log(this.state);
     const { images } = this.state;
     const hasImages = images.length > 0;
     return (
-      <div className="homeComponent">
-        <div className="mapWrapper">
-          <Map locations={this.state.locations} />
-        </div>
-        <div className="locationsListWrapper">
-          <LocationsList locations={this.state.locations} />{" "}
-        </div>
+      <div>
+        {this.state.loading == false && "...loading"}
+        {this.state.loading == true && (
+          <div key={this.state.random} className="homeComponent">
+            <div className="mapWrapper">
+              <Map
+                key = {this.state.locations}
+                locations={this.state.locations}
+                getLocations={this.getLocations}
+              />
+            </div>
+            <div className="locationsListWrapper">
+              <LocationsList key={this.state.locations} locations={this.state.locations} />{" "}
+            </div>
+          </div>
+        )}
       </div>
     );
   }

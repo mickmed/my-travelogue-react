@@ -5,7 +5,7 @@ import Dropzone from 'react-dropzone';
 class LocationUpdate extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+   
     this.state = {
       updated: false,
       city: '',
@@ -59,7 +59,7 @@ class LocationUpdate extends Component {
     })
   }
   render() {
-   console.log(this.state)
+   
     return (
       <div className="editLocation">
         <h2 className="title">Edit Location</h2>

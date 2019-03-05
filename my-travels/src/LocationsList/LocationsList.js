@@ -23,7 +23,7 @@ class LocationsList extends Component {
  
   render() {
     const { locations } = this.props;
- console.log(locations)
+
     return (
       <div className="LocationsList">
         {locations &&

@@ -36,7 +36,7 @@ class Map extends React.Component {
 
   // handleStyleLoad = map => (map.resize())
   _onClickMap = (map, evt) => {
-    console.log(map.lngLat[0]);
+   
     this.setState({ pinLong: parseFloat(map.lngLat[0]) });
     this.setState({ pinLat: parseFloat(map.lngLat[1]) });
     this.setState({ showModalAdd: true });
@@ -84,7 +84,7 @@ class Map extends React.Component {
     );
   }
   render() {
-    console.log(this.props);
+  console.log(this.state.pinLong)
     const locations = this.props.locations;
     return (
       <div>
@@ -101,10 +101,10 @@ class Map extends React.Component {
         >
           {locations && locations.map(this._renderMarker)}
           {this._renderPopup()}
-
+          {this.state.pinLong !== 0 && 
           <Marker longitude={this.state.pinLong} latitude={this.state.pinLat}>
             <MapPin size={20} />
-          </Marker>
+          </Marker>}
         </ReactMapGL>
 
         <ModalAddLocation
@@ -112,6 +112,7 @@ class Map extends React.Component {
           handleClose={this.hideModalAdd}
           long={this.state.pinLong}
           lat={this.state.pinLat}
+          getLocations={this.props.getLocations}
         />
 
         <ModalShowLocation

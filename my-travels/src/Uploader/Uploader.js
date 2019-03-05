@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
 import "./Uploader.css";
+import Axios from "axios";
 
 class Uploader extends Component {
   constructor(props) {
@@ -16,39 +17,45 @@ class Uploader extends Component {
   };
 
   handleChange = event => {
-    console.log(event.target.name, event.target.value);
     this.setState({
       [event.target.name]: event.target.value
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     console.log(this.props);
     event.preventDefault();
+    this.props.handleClose();
+
     //sending data to server
-    return fetch("http://localhost:3000/locations", {
-      //without header body is empty. Cannot identify string
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "POST",
-      //check and edit data on server
-      body: JSON.stringify({
-        city: this.state.name,
-        country: this.state.country,
-        summary: this.state.summary,
-        latitude: this.props.lat,
-        longitude: this.props.long,
-        images: this.state.images
-      })
-    }).then(() => this.setState({ submitted: true }));
+    return (
+      await Axios.post(
+        "http://localhost:3000/locations",
+        {
+          city: this.state.name,
+          country: this.state.country,
+          summary: this.state.summary,
+          latitude: this.props.lat,
+          longitude: this.props.long,
+          images: this.state.images
+        },
+       
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      )
+        
+
+        .then((res) => this.props.getLocations())
+    );
   };
 
   // https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
   // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
   //accepted - array of imgs
   onDrop = accepted => {
-    console.log(accepted[0].File);
     let previewImages = [];
     for (let i in accepted) {
       previewImages.push({ accepted });
@@ -72,7 +79,6 @@ class Uploader extends Component {
   };
 
   render() {
-    console.log(this.state.previewImages);
     const { images } = this.state;
     const hasImages = images.length > 0;
     return (
@@ -84,7 +90,7 @@ class Uploader extends Component {
               <input
                 type="text"
                 placeholder="City"
-                name="name"
+                name="city"
                 value={this.state.name}
                 onChange={this.handleChange}
               />
@@ -131,17 +137,15 @@ class Uploader extends Component {
             </Dropzone>
             {hasImages && (
               <div className="imagePreview">
-                {images.map(image => (
+                {images.map((image, index) => (
                   <div>
-                    <img src={image.imageBase64} />
+                    <img key={index} src={image.imageBase64} />
                   </div>
                 ))}
               </div>
             )}
             <div>
-              <button type="submit">
-                Submit
-              </button>
+              <button type="submit">Submit</button>
             </div>
           </div>
         </form>

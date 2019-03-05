@@ -1,7 +1,7 @@
 import React from "react";
 import "./Modal.css";
 import Uploader from "../Uploader/Uploader";
-const Modal = ({ handleClose, show, long, lat }) => {
+const Modal = ({ handleClose, show, long, lat, getLocations }) => {
   const showHideClassName = show ? "modal displayBlock" : "modal displayNone";
 
   return (
@@ -12,7 +12,7 @@ const Modal = ({ handleClose, show, long, lat }) => {
           <button onClick={handleClose}>close</button>
         </div>
 
-        <Uploader long={long} onClick={handleClose} lat={lat} />
+        <Uploader long={long} handleClose={handleClose} lat={lat} getLocations={getLocations}/>
       </section>
     </div>
   );
