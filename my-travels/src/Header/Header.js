@@ -7,7 +7,14 @@ const Header = () => {
     return (
       <header>
         <nav>
-          My Travels
+          <a href = "">My Travels</a>
+          <span>pin your memories to the map</span>
+          
+          <div>
+          ⭐️
+          📖
+          🕛
+          </div>
           {/* <Link to={'/'}>Home </Link> */}
           {/* <Link className="navbar-item" to={'/createmovie'}>Add Location </Link> */}
           

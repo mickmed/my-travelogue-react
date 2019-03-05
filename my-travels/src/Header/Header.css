@@ -1,8 +1,24 @@
 
 header{
     font-family: 'Pacifico', cursive;
-    background-color:black;
-    height:50px;
+    background-color:rgb(175, 11, 11);
+    height:55px;
     color: white;
     font-size:30px;
+    padding:0 50px;
+}
+
+nav{
+    display:flex;
+    justify-content: space-between;
+}
+
+header a{
+    text-decoration:none;
+    color:white;
+}
+
+nav span{
+    /* font-family: 'Archivo', sans-serif; */
+    font-size:.9em;
 }

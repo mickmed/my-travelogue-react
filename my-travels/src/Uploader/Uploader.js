@@ -32,7 +32,7 @@ class Uploader extends Component {
       await Axios.post(
         "http://localhost:3000/locations",
         {
-          city: this.state.name,
+          city: this.state.city,
           country: this.state.country,
           summary: this.state.summary,
           latitude: this.props.lat,

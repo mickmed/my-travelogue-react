@@ -35,6 +35,7 @@ class LocationsList extends Component {
             >
               <p>
                 {location.city}, <span className="stubborn">{location.country}</span>
+
               </p>
 
               <img
