@@ -4,7 +4,7 @@ import LocationsList from "../LocationsList/LocationsList";
 import MapPin from "./MapPin";
 import LocationInfo from "./LocationInfo.js";
 import ModalAddLocation from "../ModalAddLocation/ModalAddLocation";
-import ModalShowLocation from "../ModalShowLocation/ModalShowLocation"
+import ModalShowLocation from "../ModalShowLocation/ModalShowLocation";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoibWlja21lZCIsImEiOiJjanFzdTVtZjEwMnY0NDJzM2g4MXNuNTM0In0.VDbqZxEh0hxXAixRjS9FzA";
@@ -55,8 +55,9 @@ class Map extends React.Component {
       >
         <div className="treepin">
           <MapPin
-            size={20} onClick={() => this.setState({popupInfo: location})}
-           
+            size={20}
+            onClick={() => this.setState({ popupInfo: location })}
+
             // onClick={this._onClickPin}
           />
         </div>
@@ -65,17 +66,21 @@ class Map extends React.Component {
   };
 
   _renderPopup() {
-    const {popupInfo} = this.state;
+    const { popupInfo } = this.state;
 
-    return popupInfo && (
-      <Popup tipSize={5}
-        anchor="top"
-        longitude={popupInfo.longitude}
-        latitude={popupInfo.latitude}
-        closeOnClick={false}
-        onClose={() => this.setState({popupInfo: null})} >
-        <LocationInfo locationInfo={popupInfo} />
-      </Popup>
+    return (
+      popupInfo && (
+        <Popup
+          tipSize={5}
+          anchor="top"
+          longitude={popupInfo.longitude}
+          latitude={popupInfo.latitude}
+          closeOnClick={false}
+          onClose={() => this.setState({ popupInfo: null })}
+        >
+          <LocationInfo locationInfo={popupInfo} />
+        </Popup>
+      )
     );
   }
   render() {
@@ -96,22 +101,18 @@ class Map extends React.Component {
         >
           {locations && locations.map(this._renderMarker)}
           {this._renderPopup()}
-          
+
           <Marker longitude={this.state.pinLong} latitude={this.state.pinLat}>
-            <MapPin
-              size={20} 
-            />
+            <MapPin size={20} />
           </Marker>
         </ReactMapGL>
-       
+
         <ModalAddLocation
           show={this.state.showModalAdd}
           handleClose={this.hideModalAdd}
           long={this.state.pinLong}
           lat={this.state.pinLat}
-        >
-          <p>Add a Location</p>
-        </ModalAddLocation>
+        />
 
         <ModalShowLocation
           show={this.state.showModalShow}

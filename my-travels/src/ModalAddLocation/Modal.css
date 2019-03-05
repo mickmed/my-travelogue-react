@@ -5,22 +5,30 @@
     width:100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
+    font-family: 'Archivo', sans-serif;
   }
   
-  .modal-main {
-    position:fixed;
-    background: white;
-    width: 80%;
-    height: auto;
-    top:50%;
+  .modalMain {
+    position:fixed; 
+   
+    background-image: linear-gradient( rgb(250, 248, 248), rgb(212, 212, 212));
+    width: 90%;
+    height: 60%;
+    top:40%;
     left:50%;
     transform: translate(-50%,-50%);
   }
   
-  .display-block {
+  .displayBlock {
     display: block;
   }
   
-  .display-none {
+  .displayNone {
     display: none;
+  }
+
+  .toprow{
+    display:flex;
+    justify-content: space-between;
+    padding:0 1em;
   }

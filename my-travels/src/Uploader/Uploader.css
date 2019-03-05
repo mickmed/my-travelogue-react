@@ -1,0 +1,80 @@
+.uploader {
+  width: 90%;
+  padding: 2%;
+  margin: 0 auto;
+}
+.addLocationForm {
+  display: flex;
+  justify-content: space-between;
+  /* background-color:purple; */
+}
+
+.addLocationForm .fields {
+  flex: 2;
+}
+
+.addLocationForm .field {
+  /* width:100%; */
+  padding: 1em 0;
+}
+
+.addLocationForm input,
+.addLocationForm textarea,
+.dropzone,
+.addLocationForm button {
+  width: 90%;
+  border: 1px solid lightblue;
+  border-radius: 8px;
+  padding: 0 0.5em;
+}
+
+.addLocationForm input[type="text"] {
+  height: 3em;
+}
+
+.addLocationForm textarea {
+  padding-top: 1em;
+  height: 8em;
+  font-family: "Archivo", sans-serif;
+}
+
+.addLocationForm .dropzoneWrapper {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.addLocationForm .dropzone,
+.addLocationForm button {
+  background-color: white;
+  
+}
+
+.addLocationForm .dropzone {
+  width: 90%;
+  height: 8em;
+  margin: 1em 0;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addLocationForm button {
+    padding:1em;
+    width:100%;
+    
+}
+
+.imagePreview{
+    display:flex;
+   
+}
+
+.imagePreview div{
+    padding:.5em;
+}
+
+.imagePreview div img{
+    height:80px;
+}

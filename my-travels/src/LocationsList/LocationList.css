@@ -1,0 +1,14 @@
+.Location{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family: 'Parisienne', serif;
+    font-size: 2em;
+    /* overflow-y: scroll;
+    overflow-x:hidden; */
+
+}
+
+img{
+    height: 50px;
+}

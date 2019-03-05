@@ -1,19 +1,21 @@
 import React from "react";
-import './Modal.css'
-import Uploader from '../Uploader/Uploader'
-const Modal = ({ handleClose, show, children, long, lat }) => {
+import "./Modal.css";
+import Uploader from "../Uploader/Uploader";
+const Modal = ({ handleClose, show, long, lat }) => {
+  const showHideClassName = show ? "modal displayBlock" : "modal displayNone";
 
-    const showHideClassName = show ? "modal display-block" : "modal display-none";
-  
-    return (
-      <div className={showHideClassName}>
-        <section className="modal-main">
-          {children}
-          <Uploader long={long} lat={lat}/>
+  return (
+    <div className={showHideClassName}>
+      <section className="modalMain">
+        <div className="toprow">
+          <h1 className="title">Add a new location</h1>
           <button onClick={handleClose}>close</button>
-        </section>
-      </div>
-    );
-  };
+        </div>
 
-  export default Modal
+        <Uploader long={long} onClick={handleClose} lat={lat} />
+      </section>
+    </div>
+  );
+};
+
+export default Modal;

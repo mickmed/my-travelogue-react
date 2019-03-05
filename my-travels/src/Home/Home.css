@@ -11,7 +11,8 @@
 }
 
 .locationsListWrapper{
-    background-image: linear-gradient(lightgrey, darkgrey);
+    background-image: linear-gradient(rgb(249, 252, 252), lightgrey);
     padding:2%;
+    max-height:600px;
 }
 

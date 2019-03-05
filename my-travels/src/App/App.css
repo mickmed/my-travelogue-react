@@ -2,8 +2,8 @@
 
 .App{
     height:90vh;
-    width:95vw;
-    background-image: linear-gradient(darkred, purple);
+    width:100vw;
+    background-image: linear-gradient(lightyellow, rgb(176, 223, 255));
     margin:0 auto;
 
 }

@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
-
-
-// import { Redirect } from "react-router-dom";
+import "./Uploader.css";
 
 class Uploader extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
   state = {
-    name: "",
+    city: "",
+    country: "",
     summary: "",
     images: [],
+    previewImages: [],
     submitted: false
   };
 
@@ -34,7 +34,8 @@ class Uploader extends Component {
       method: "POST",
       //check and edit data on server
       body: JSON.stringify({
-        name: this.state.name,
+        city: this.state.name,
+        country: this.state.country,
         summary: this.state.summary,
         latitude: this.props.lat,
         longitude: this.props.long,
@@ -47,7 +48,12 @@ class Uploader extends Component {
   // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
   //accepted - array of imgs
   onDrop = accepted => {
-    console.log(accepted);
+    console.log(accepted[0].File);
+    let previewImages = [];
+    for (let i in accepted) {
+      previewImages.push({ accepted });
+    }
+    this.setState({ previewImages: previewImages });
     accepted.forEach(file => {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
@@ -66,44 +72,45 @@ class Uploader extends Component {
   };
 
   render() {
-    
-    //if form submited redirect to the UserPage
-    // if (this.state.submitted) {
-    //   return (
-    //     // <Redirect to={`/artist/${this.props.user.name.replace(" ", "-")}`} />
-    //   );
-    // }
-    //connects to dropzone showing preview
+    console.log(this.state.previewImages);
     const { images } = this.state;
     const hasImages = images.length > 0;
     return (
-      <div>
-  
-        <h1 className="title">Add a new location</h1>
-        <form className="create-form" onSubmit={this.handleSubmit}>
-          <div className="field">
-            <label className="name">City: </label>
-            <input
-              type="text"
-              placeholder="City"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="field">
-            <label className="name">Summary: </label>
-            <input
-              type="text"
-              placeholder="Summary"
-              name="summary"
-              value={this.state.summary}
-              onChange={this.handleChange}
-            />
+      <div className="uploader">
+        <form className="addLocationForm" onSubmit={this.handleSubmit}>
+          <div className="fields">
+            <div className="field">
+              {/* <label className="name">City: </label> */}
+              <input
+                type="text"
+                placeholder="City"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="field">
+              {/* <label className="country">Country: </label> */}
+              <input
+                type="text"
+                placeholder="Country"
+                name="country"
+                value={this.state.country}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="field">
+              {/* <label className="summary">Summary: </label> */}
+              <textarea
+                placeholder="Summary"
+                name="summary"
+                value={this.state.summary}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
 
-          <div className="field-drop">
-            <label className="dropzone">Upload Images: </label>
+          <div className="dropzoneWrapper">
             <Dropzone
               maxSize={2000000}
               accept="image/jpeg, image/png"
@@ -111,37 +118,32 @@ class Uploader extends Component {
             >
               {({ getRootProps, getInputProps, isDragActive }) => {
                 return (
-                  <div {...getRootProps()} className="drop-zone">
+                  <div {...getRootProps()} className="dropzone">
                     <input {...getInputProps()} />
                     {isDragActive ? (
-                      <p className="drop-zone-text">Drop files here...</p>
+                      <p>Drop files here...</p>
                     ) : (
-                      <p className="drop-zone-text">
-                        Drop images here, or click to select files to upload.
-                      </p>
+                      <p>Drop images here, or click to upload.</p>
                     )}
                   </div>
                 );
               }}
             </Dropzone>
             {hasImages && (
-              <div className="wrap-preview">
+              <div className="imagePreview">
                 {images.map(image => (
-                  <div
-                    className="drop-zone-preview"
-                    key={image.name}
-                    style={{
-                      backgroundImage: `url(${image.image_base64})`
-                    }}
-                    alt={image.name}
-                  />
+                  <div>
+                    <img src={image.imageBase64} />
+                  </div>
                 ))}
               </div>
             )}
+            <div>
+              <button type="submit">
+                Submit
+              </button>
+            </div>
           </div>
-          <button className="submit-btn" type="submit">
-            Submit
-          </button>
         </form>
       </div>
     );
