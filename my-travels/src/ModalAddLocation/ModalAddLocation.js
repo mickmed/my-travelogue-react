@@ -1,5 +1,5 @@
 import React from "react";
-import "./Modal.css";
+import "./ModalAddLocation.css";
 import Uploader from "../Uploader/Uploader";
 const Modal = ({ handleClose, show, long, lat, getLocations }) => {
   const showHideClassName = show ? "modal displayBlock" : "modal displayNone";

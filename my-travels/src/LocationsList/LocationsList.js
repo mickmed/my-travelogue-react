@@ -25,16 +25,16 @@ class LocationsList extends Component {
     const { locations } = this.props;
 
     return (
-      <div className="LocationsList">
+      <div className="locationsList">
         {locations &&
           locations.map((location, index) => (
             <div
               key={index}
-              className="Location"
+              className="location"
               onClick={() => this.showModalUpdate(location)}
             >
-              <p key={index}>
-                {location.city}, {location.country}
+              <p>
+                {location.city}, <span className="stubborn">{location.country}</span>
               </p>
 
               <img

@@ -33,8 +33,8 @@ class LocationUpdate extends Component {
       console.log(true);
 
       let updateInfo = {
-        city: this.props.city,
-        country: this.props.country,
+        city: this.state.city,
+        country: this.state.country,
         summary: this.state.summary,
         
       };
@@ -96,7 +96,7 @@ class LocationUpdate extends Component {
           </div>
 
           <button value="Submit" className="submit-btn" onClick={this.handleEdit}>
-            Edit Exhibit
+            Upadate
           </button>
         </form>
       </div>

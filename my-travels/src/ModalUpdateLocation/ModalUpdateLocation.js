@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Modal.css";
+import "./ModalUpdateLocation.css";
 import LocationUpdate from "../LocationUpdate/LocationUpdate";
 import Axios from 'axios'
 
