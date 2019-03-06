@@ -5,7 +5,7 @@ class LocationInfo extends PureComponent {
   render() {
     
     const { locationInfo } = this.props;
-    console.log(locationInfo)
+   
     return (
       <div className="popup">
         <p>place: {locationInfo.name}</p>

@@ -20,10 +20,10 @@ class Home extends Component {
     };
   }
   getLocations = async (req, res) => {
-    console.log("test");
+  
     try {
       const fetchLocations = await Axios("http://localhost:3000/locations");
-      console.log(fetchLocations);
+      
       const locations = fetchLocations.data;
       this.setState({
         locations: locations,
@@ -38,18 +38,10 @@ class Home extends Component {
     await this.getLocations();
   };
 
-  // submitted = () => {
-  //   this.setState({submitted:true})
-  //   // this.setState({key:Math(random)})
-  // }
 
-  // componentDidUpdate(prevProps, prevState){
-  //   console.log(prevState.submitted, this.state.submitted)
-  //   prevState.submitted === this.state.submitted && this.forceUpdate()
-  // }
 
   render() {
-    console.log(this.state);
+   
     const { images } = this.state;
     const hasImages = images.length > 0;
     return (

@@ -9,19 +9,18 @@ export default class SimpleSlider extends React.Component {
     let imgObjs = [];
     for (let key in locationInfo) {
       if (key === "images") {
-        // console.log('hi')
-        // console.log(locationInfo[key])
+       
         imgObjs.push(locationInfo[key]);
       }
     }
     let images = [];
-    console.log(imgObjs[0]);
+   
     imgObjs[0] &&
       imgObjs[0].map(image => {
-        console.log(image.imageBase64);
+       
         images.push(image.imageBase64);
       });
-    console.log(images);
+  
     var settings = {
       dots: true,
       infinite: true,

@@ -15,7 +15,7 @@ class LocationUpdate extends Component {
     };
   }
   handleChange = event => {
-      console.log(event.target.name, event.target.value)
+      
     this.setState({
         
       [event.target.name]: event.target.value
@@ -25,12 +25,11 @@ class LocationUpdate extends Component {
   handleEdit = async event => {
     event.preventDefault();
 
-    console.log(event.target);
+    
     let answer = window.confirm('Are you sure you want to edit?');
 
     if (answer === true) {
-    //   window.location.href = '/';
-      console.log(true);
+   
 
       let updateInfo = {
         city: this.state.city,
@@ -45,9 +44,7 @@ class LocationUpdate extends Component {
           updateInfo
         )
         .then(res => console.log(res.data));
-    } else {
-    //   window.location.href = '/';
-    }
+    } 
   };
   //component mounts before props from modal are passed, so this is needed to set state for controlled form
   componentDidUpdate(prevProps){

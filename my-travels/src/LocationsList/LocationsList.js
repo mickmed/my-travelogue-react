@@ -12,7 +12,7 @@ class LocationsList extends Component {
   }
 
   showModalUpdate = (arr) => {
-      console.log(arr)
+     
     this.setState({ showModalUpdate: true });
     this.setState({location:arr})
     

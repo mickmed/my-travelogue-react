@@ -46,7 +46,7 @@ class Map extends React.Component {
   };
 
   _onClickPin = (location) => {
-    console.log(location)
+   
     this.setState({ showModalPhotos: true });
     this.setState({locationInfo: location})
   };

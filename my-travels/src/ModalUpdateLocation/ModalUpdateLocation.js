@@ -11,7 +11,7 @@ class ModalUpdateLocation extends Component {
 
   deleteLocation = async event => {
     event.preventDefault();
-    console.log(event.target.getAttribute("data-location-index"))
+    
     try {
       const deleteLocation = await Axios.delete(
         "http://localhost:3000/locations/" +

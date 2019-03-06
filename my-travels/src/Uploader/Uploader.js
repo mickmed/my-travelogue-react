@@ -23,7 +23,7 @@ class Uploader extends Component {
   };
 
   handleSubmit = async event => {
-    console.log(this.props);
+   
     event.preventDefault();
     this.props.handleClose();
 

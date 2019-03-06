@@ -11,7 +11,7 @@ class ModalShowLocation extends Component {
   render() {
     const showHideClassName = show ? "modal displayBlock" : "modal displayNone";
 
-    console.log(locationInfo, showHideClassName);
+  
     return (
       <div className={showHideClassName}>
         <section className="modalMain">
