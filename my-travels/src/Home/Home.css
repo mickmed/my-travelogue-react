@@ -12,7 +12,7 @@
 
 .locationsListWrapper{
     background-image: linear-gradient(rgb(249, 252, 252), lightgrey);
-    padding: 1% 2%;
-    max-height:600px;
+    padding: .5% 2%;
+    max-height:525px;
 }
 

@@ -1,34 +1,41 @@
-.modalAddLocation {
+.modalShowPhotos {
     position: fixed;
     top: 0;
     left: 0;
     width:100%;
     height: 100%;
+  
     background: rgba(0, 0, 0, 0.6);
     font-family: 'Archivo', sans-serif;
   }
   
-  .modalMainAddLocation {
+  .modalMainShowPhotos {
     position:fixed; 
    
     background-image: linear-gradient( rgb(250, 248, 248), rgb(212, 212, 212));
-    width: 60%;
-    height: 60%;
-    top:40%;
+    width: 70%;
+    height: 80%;
+    top:45%;
     left:50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-45%);
   }
   
-  .displayBlockAddLocation {
+  .displayBlockShowPhotos {
     display: block;
   }
   
-  .displayNoneAddLocation {
+  .displayNoneShowPhotos {
     display: none;
   }
-
-  .toprowAddLocation{
+  
+  .toprowShowPhotos {
     display:flex;
     justify-content: space-between;
     padding:0 1em;
+  }
+
+  .modalMainShowPhotos button{
+      display:flex;
+      justify-content: center;
+      
   }

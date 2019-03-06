@@ -1,25 +1,28 @@
-import React from "react";
-import "./Modal.css";
+import React, { Component } from "react";
+import "./ModalShowLocation.css";
 // import { Link } from "react-router-dom";
 
-const Modal = ({ handleClose, show, children, locationInfo }) => {
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
-  
+// const Modal = ({ handleClose, show, children, locationInfo }) => {
+class ModalShowLocation extends Component {
+  constructor(props) {
+    super(props);
+  }
+  state = {};
+  render() {
+    const showHideClassName = show ? "modal displayBlock" : "modal displayNone";
 
-  return (
-    <div className={showHideClassName}>
-      <section className="modal-main">
-        {children}
-        
-        {locationInfo.map((location, index) => (
-          <div key={index}>
-            <p>{location.city}</p>
-          </div>
-        ))}
-        <button onClick={handleClose}>close</button>
-      </section>
-    </div>
-  );
-};
+    console.log(locationInfo, showHideClassName);
+    return (
+      <div className={showHideClassName}>
+        <section className="modalMain">
+          {children}
 
-export default Modal;
+          {/* {locationInfo.id} */}
+          <button onClick={handleClose}>close</button>
+        </section>
+      </div>
+    );
+  }
+}
+
+export default ModalShowLocation;

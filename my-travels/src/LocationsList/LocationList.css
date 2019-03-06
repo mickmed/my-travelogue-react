@@ -12,6 +12,8 @@
   font-family: "Parisienne", serif;
   /* font-size: 2em; */
   margin-block-start:0;
+  /* background-image: linear-gradient(rgb(249, 252, 252), rgb(245, 243, 243)); */
+  border-bottom:.3px solid rgb(249, 252, 252);
 }
 
  p {

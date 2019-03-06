@@ -4,7 +4,8 @@ import LocationsList from "../LocationsList/LocationsList";
 import MapPin from "./MapPin";
 import LocationInfo from "./LocationInfo.js";
 import ModalAddLocation from "../ModalAddLocation/ModalAddLocation";
-import ModalShowLocation from "../ModalShowLocation/ModalShowLocation";
+import ModalShowPhotos from "../ModalShowPhotos/ModalShowPhotos";
+
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoibWlja21lZCIsImEiOiJjanFzdTVtZjEwMnY0NDJzM2g4MXNuNTM0In0.VDbqZxEh0hxXAixRjS9FzA";
@@ -15,7 +16,7 @@ class Map extends React.Component {
     this.state = {
       viewport: {
         width: 900,
-        height: 700,
+        height: 550,
         latitude: 37.7577,
         longitude: -122.4376,
         zoom: 1
@@ -24,16 +25,18 @@ class Map extends React.Component {
       pinLat: 0,
       random: 0,
       showModalAdd: false,
-      popupInfo: null
+      showModalPhotos: false,
+      
+      locationInfo: null
     };
   }
   hideModalAdd = () => {
     this.setState({ showModalAdd: false });
   };
-  hideModalShow = () => {
-    this.setState({ showModalShow: false });
+  hideModalPhotos = () => {
+    this.setState({ showModalPhotos: false });
   };
-
+  
   // handleStyleLoad = map => (map.resize())
   _onClickMap = (map, evt) => {
    
@@ -42,9 +45,12 @@ class Map extends React.Component {
     this.setState({ showModalAdd: true });
   };
 
-  _onClickPin = (map, evt) => {
-    this.setState({ showModalShow: true });
+  _onClickPin = (location) => {
+    console.log(location)
+    this.setState({ showModalPhotos: true });
+    this.setState({locationInfo: location})
   };
+
 
   _renderMarker = (location, index) => {
     return (
@@ -56,9 +62,9 @@ class Map extends React.Component {
         <div className="treepin">
           <MapPin
             size={20}
-            onClick={() => this.setState({ popupInfo: location })}
+            // onClick={() => this.setState({ popupInfo: location })}
 
-            // onClick={this._onClickPin}
+            onClick={()=>this._onClickPin(location)}
           />
         </div>
       </Marker>
@@ -84,7 +90,7 @@ class Map extends React.Component {
     );
   }
   render() {
-  console.log(this.state.pinLong)
+ 
     const locations = this.props.locations;
     return (
       <div>
@@ -96,7 +102,7 @@ class Map extends React.Component {
           mapStyle="mapbox://styles/mapbox/streets-v9"
           containerStyle={{ height: "100%", width: "100%" }}
           //   onStyleLoad={this.handleStyleLoad}
-
+          attributionControl= {false}
           onClick={this._onClickMap}
         >
           {locations && locations.map(this._renderMarker)}
@@ -115,13 +121,13 @@ class Map extends React.Component {
           getLocations={this.props.getLocations}
         />
 
-        <ModalShowLocation
-          show={this.state.showModalShow}
-          handleClose={this.hideModalShow}
-          locationInfo={this.props.locations}
-        >
-          <p>Details for Location</p>
-        </ModalShowLocation>
+        <ModalShowPhotos
+         
+          show={this.state.showModalPhotos}
+          handleClose={this.hideModalPhotos}
+          locationInfo={this.state.locationInfo}
+       
+        />
       </div>
     );
   }

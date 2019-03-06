@@ -47,7 +47,7 @@ class LocationsList extends Component {
               />
             </div>
           ))}
-          <ModalUpdateLocation
+          {/* <ModalUpdateLocation
           show={this.state.showModalUpdate}
           handleClose={this.hideModalUpdate}
           location={this.state.location}
@@ -55,7 +55,7 @@ class LocationsList extends Component {
           
         >
           <p>Details for Location</p>
-        </ModalUpdateLocation>
+        </ModalUpdateLocation> */}
       </div>
     );
   }

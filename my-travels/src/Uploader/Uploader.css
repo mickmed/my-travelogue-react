@@ -6,11 +6,13 @@
 .addLocationForm {
   display: flex;
   justify-content: space-between;
+  flex-direction:row;
   /* background-color:purple; */
 }
 
 .addLocationForm .fields {
   flex: 2;
+  width:10%;
 }
 
 .addLocationForm .field {
