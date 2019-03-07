@@ -26,9 +26,15 @@ App pins travelers destination on map. User can click on a pin and see photos th
 
 ## Wireframes
 
+[Main Page](https://drive.google.com/file/d/0BxwJ8ZYKdqwvSXNfRWc1OEpUdEhIeFYwX3MzWFQweVRKSE1B/view?usp=sharing)
+[Carousel](https://drive.google.com/file/d/0BxwJ8ZYKdqwva2hWamRPSzdCTEpfOVFwWElXay0yRWppSlJ3/view?usp=sharing)
+
+
 ---
 
 ## Priority Matrix
+
+https://drive.google.com/file/d/0BxwJ8ZYKdqwvdUJhNmxCZVlHcHJZODZtMk42WHFGQmJLLXJ3/view?usp=sharing
 
 ---
 
@@ -77,13 +83,15 @@ The functionality will then be divided into two separate lists: MPV and PostMVP.
 ---
 
 ## Architectural Design
+https://drive.google.com/file/d/0BxwJ8ZYKdqwvMy1TRXZKLWdKa1pXazdlVnMwUm15VlVHVGRj/view?usp=sharing
 
----
+
 
 ---
 
 ## ERD
-http://res.cloudinary.com/dw5c4jnc3/image/upload/v1551225598/Screen_Shot_2019-02-26_at_6.40.32_PM.png
+
+https://drive.google.com/file/d/1fNe9WDr2QYyryfsGiT-QRzk6nuSIxsep/view?usp=sharing
 
 ---
 
@@ -107,40 +115,59 @@ Methods attempted were
     3) storing image files as base64 string
     4) storing image files as url
 
-    The following are some of the research links used on this attempt:
 
-    https://medium.com/@ebenwoodward/linking-a-react-app-to-rails-active-storage-d414afa4bc7f
-    https://github.com/rails/rails/issues/32208
-    https://stackoverflow.com/questions/49890851/rails-5-2-rest-api-active-storage-react-add-attachment-url-to-controller-r
-    https://arpitonline.com/2018/06/13/using-activestorage-with-dropzone-in-a-react-app/
-    https://evilmartians.com/chronicles/rails-5-2-active-storage-and-beyond
-    https://www.endpoint.com/blog/2018/03/12/rails-active-storage
-    https://www.reddit.com/r/rails/comments/9ax6kx/is_there_a_dropzonejs_or_similar_active_storage/
-    https://api.rubyonrails.org/files/activestorage/README_md.html
-    https://www.pluralsight.com/guides/handling-file-upload-using-ruby-on-rails-5-api
-    http://jameshuynh.com/rails/react/upload/2017/09/17/how-to-upload-files-using-react-and-rails-like-a-boss/
-    https://medium.com/@bruno_boehm/reactjs-ruby-on-rails-api-heroku-app-2645c93f0814
+  The following are some of the research links used on this attempt:
 
-    amongst many many others
+
+
+  https://medium.com/@ebenwoodward/linking-a-react-app-to-rails-active-storage-d414afa4bc7f
+  
+  https://github.com/rails/rails/issues/32208
+
+  https://stackoverflow.com/questions/49890851/rails-5-2-rest-api-active-storage-react-add-attachment-url-to-controller-r
+  
+  https://arpitonline.com/2018/06/13/using-activestorage-with-dropzone-in-a-react-app/
+  
+  https://evilmartians.com/chronicles/rails-5-2-active-storage-and-beyond
+  
+  https://www.endpoint.com/blog/2018/03/12/rails-active-storage
+  
+  https://www.reddit.com/r/rails/comments/9ax6kx/is_there_a_dropzonejs_or_similar_active_storage/
+  
+  https://api.rubyonrails.org/files/activestorage/README_md.html
+  
+  https://www.pluralsight.com/guides/handling-file-upload-using-ruby-on-rails-5-api
+
+  http://jameshuynh.com/rails/react/upload/2017/09/17/how-to-upload-files-using-react-and-rails-like-a-boss/
+
+  
+  https://medium.com/@bruno_boehm/reactjs-ruby-on-rails-api-heroku-app-2645c93f0814
+
+  amongst many many others
+
+
+
+
+
 
 
 
 
 | Component | Priority | Estimated Time | Actual Time |
 |---|---| ---|---|
-| Initiate App and Database| 1 | 1 ||
+| Initiate App and Database| 1 | 1 | 1 |
 | Render and size Map on page| 2 | 1 | 3 |
 | Generate Models and Controllers for Users, Locations, and Images| 3 | 2 | 24 |
-| Add Rails Dropzone and Exif Gems | 4 | 1 ||
-| Extract Exif data from image and create pin on map | 5 | 5 ||
-| Add Image to cloud server and URL to Image Table in DB | 6 | 5 ||
-| Make Pin clickable to retrieve image URL and show image and image details | 7 | 5 ||
-| Set up user login and auth | 8 | 2 ||
-| Set up Header (w/Navbar), and Footer | 9 | 3 ||
-| Build Image Modal | 10 | 8 | |
-| Build Image Page that only shows Images with filters for date, location, etc...| 11 | 8 ||
-| Style and add UI features, animations, carousel, etc | 12 | 16 | |
-| Total |  | 57 |  | 
+| Add Rails Dropzone and Exif Gems | 4 | 1 | x |
+| Extract Exif data from image and create pin on map | 5 | 5 | x |
+| Add Image to cloud server and URL to Image Table in DB | 6 | 5 | x |
+| Make Pin clickable to retrieve image URL and show image and image details | 7 | 5 | x |
+| Set up user login and auth | 8 | 2 | x |
+| Set up Header (w/Navbar), and Footer | 9 | 3 | x |
+| Build Image Modal | 10 | 8 | x |
+| Build Image Page that only shows Images with filters for date, location, etc...| 11 | 8 | x |
+| Style and add UI features, animations, carousel, etc | 12 | 16 | x |
+| Total |  | 57 | 4 | 
 
 *Step 3 is where a lot of time was lost attempting to use images with Rails at which point the above process was abaonden.
 
@@ -173,7 +200,7 @@ Methods attempted were
 | Library | What it Does | 
 | --- | :---: |  
 | Ruby on Rails | Main application framework | --- abandoned
-| Sequelize| WSGI | 
+| Sequelize| ORM | 
 | React | Javascript Frontend
 | Express | WSGI
 | MapboxGL | Used to display pics on map | 
@@ -205,6 +232,6 @@ Methods attempted were
 
 
 ## Issues and Resolutions
-    Attempted to deploy the rails backend on Heroku early in development in order to secure deployment for future git pushes. Unfortunately this proved frustration, cumbersome, and time consuming. Firstly, Heroku rejected the Ruby Version. After installing rvm (which was also a somewhat complicated issue), the Ruby version was switched to 2.6.0, which requested that bundler must be version 2.0. After switching to 2.0, the same error occured on the Heroku server. The bundler was updated on Heroku but to no avail. Several other gems had to be addressed, and after many many hours and countless google and stack overflow searches, Ruby was downgraded to 2.5.0 and the deployment was successful. Unfortuntely, the Rails backend was abandoned and swapped out for Node/Express for reasons mentioned above. 
+  Attempted to deploy the rails backend on Heroku early in development in order to secure deployment for future git pushes. Unfortunately this proved frustration, cumbersome, and time consuming. Firstly, Heroku rejected the Ruby Version. After installing rvm (which was also a somewhat complicated issue), the Ruby version was switched to 2.6.0, which requested that bundler must be version 2.0. After switching to 2.0, the same error occured on the Heroku server. The bundler was updated on Heroku but to no avail. Several other gems had to be addressed, and after many many hours and countless google and stack overflow searches, Ruby was downgraded to 2.5.0 and the deployment was successful. Unfortuntely, the Rails backend was abandoned and swapped out for Node/Express for reasons mentioned above, as well as CORS issues (which were actually resolved). 
 
 
