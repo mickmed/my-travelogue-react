@@ -1,10 +1,44 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+#Summary
+
+This app uses a react frontend and a node/express backend
+
+##Git Repositories
+###Backend
+https://git.generalassemb.ly/mickmed/my-travels-express
+
+###FrontEnd
+https://git.generalassemb.ly/mickmed/my-travels-react
+
+
+
+
+
+
+##Instructions
+
+User clicks anywhere on the map. A pin will be added to the map and a popup form will present. The user enters the data and uploads the pictures associated with that location. When the user returns to the map and clicks on the pin, a carousel of the appropriate photos is presented. 
+
+
+#npm packages
+npm install react-map-gl
+npm install axios
+npm install react-dropzone
+npm install react-slick
+
+
+
+
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
+
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
