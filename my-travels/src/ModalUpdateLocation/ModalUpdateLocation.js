@@ -26,13 +26,13 @@ class ModalUpdateLocation extends Component {
   render() {
     
     const showHideClassName = this.props.show
-      ? "modal display-block"
-      : "modal display-none";
+      ? "modalUpdate displayBlockUpdate"
+      : "modalUpdate displayBlockUpdate";
     return (
       <div className={showHideClassName}>
-        <section className="modal-main">
+        <section className="modalMainUpdate">
           {this.props.children}
-          <LocationUpdate location={this.props.location} />
+          <LocationUpdate location={this.props.location} handleClose={this.props.handleClose}/>
           <button onClick={this.props.handleClose}>close</button>
         
         <form

@@ -14,7 +14,7 @@
     position:fixed; 
     background-image: linear-gradient( rgb(250, 248, 248), rgb(212, 212, 212));
     width: 60%;
-    height: 60%;
+    height: 70%;
     top:40%;
     left:50%;
     transform: translate(-50%,-50%);

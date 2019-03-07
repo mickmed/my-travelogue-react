@@ -10,11 +10,11 @@ You are **responsible** for scheduling time with your squad to seek approval for
 |---|---| ---|
 |Day 1| Project Description | Complete
 |Day 2| Wireframes / Priority Matrix / Functional Components | Complete
-|Day 3| Core Application Structure (HTML, CSS, etc.) | Incomplete
-|Day 4| Pseudocode / actual code | Incomplete
-|Day 5| Initial Clickable Model  | Incomplete
-|Day 6| MVP | Incomplete
-|Day 7| Present | Incomplete
+|Day 3| Core Application Structure (HTML, CSS, etc.) | Complete
+|Day 4| Pseudocode | Complete
+|Day 5| Initial Clickable Model  | Complete
+|Day 6| MVP | Complete
+|Day 7| Present | Complete
 
 ---
 
@@ -38,7 +38,6 @@ App pins travelers destination on map. User can click on a pin and see photos th
 The functionality will then be divided into two separate lists: MPV and PostMVP.  Carefully decided what is placed into your MVP as the client will expect this functionality to be implemented upon project completion.  
 
 #### MVP 
-
 - Init App/Database
 - Render Map to page
 - Generate Models and Controllers for Users, Locations, and Images
@@ -53,10 +52,27 @@ The functionality will then be divided into two separate lists: MPV and PostMVP.
 - Build Image Page that only shows Images with filters for date, location, etc...
 - Style pages
 
+### The initial MVP was rewritten to cater to Node/Express backend
+- Init App/Database
+- Render Map to page
+- Set up Database with Sequelize
+- Build routes in Sequelize
+- Build form that includes react-dropzone 
+- Test data and image upload to tables
+- Build forms and implement full crud
+- Place Marker on Map (on click) and retrieve geoloction
+- Set up Header (w/Navbar)
+- Style all components
+
+
 #### PostMVP 
 
 - Add User Favorites List
-- Add User following other User feature
+- Add User Login
+- Change color of persistant pin
+- Create user diary
+- Create lines between pins to show distance and route
+
 
 ---
 
@@ -73,21 +89,48 @@ http://res.cloudinary.com/dw5c4jnc3/image/upload/v1551225598/Screen_Shot_2019-02
 
 ## UI Components
 
-{2 Rails views, one for the Map Page (which includes the image modal), and one for the Images}
+- App 
+- Home
 - Map
-- Image Drop Zone
-- Image Modal
-- Image Display Page that shows images by filter, such as date, location, etc
+- Location List
+- Modals - Add Location (includes Dropzone), Show Location Photos (w/ Carousel), Update Location
+
 
 ---
 
 Timebox Approximations
 
+This approach was abandoned on day 4 due to hassles with passing images to Rails DB. 
+Methods attempted were 
+    1) using Active Storage with Google cloud server gem
+    2) using Carrierwave gem
+    3) storing image files as base64 string
+    4) storing image files as url
+
+    The following are some of the research links used on this attempt:
+
+    https://medium.com/@ebenwoodward/linking-a-react-app-to-rails-active-storage-d414afa4bc7f
+    https://github.com/rails/rails/issues/32208
+    https://stackoverflow.com/questions/49890851/rails-5-2-rest-api-active-storage-react-add-attachment-url-to-controller-r
+    https://arpitonline.com/2018/06/13/using-activestorage-with-dropzone-in-a-react-app/
+    https://evilmartians.com/chronicles/rails-5-2-active-storage-and-beyond
+    https://www.endpoint.com/blog/2018/03/12/rails-active-storage
+    https://www.reddit.com/r/rails/comments/9ax6kx/is_there_a_dropzonejs_or_similar_active_storage/
+    https://api.rubyonrails.org/files/activestorage/README_md.html
+    https://www.pluralsight.com/guides/handling-file-upload-using-ruby-on-rails-5-api
+    http://jameshuynh.com/rails/react/upload/2017/09/17/how-to-upload-files-using-react-and-rails-like-a-boss/
+    https://medium.com/@bruno_boehm/reactjs-ruby-on-rails-api-heroku-app-2645c93f0814
+
+    amongst many many others
+
+
+
+
 | Component | Priority | Estimated Time | Actual Time |
 |---|---| ---|---|
 | Initiate App and Database| 1 | 1 ||
 | Render and size Map on page| 2 | 1 | 3 |
-| Generate Models and Controllers for Users, Locations, and Images| 3 | 2 ||
+| Generate Models and Controllers for Users, Locations, and Images| 3 | 2 | 24 |
 | Add Rails Dropzone and Exif Gems | 4 | 1 ||
 | Extract Exif data from image and create pin on map | 5 | 5 ||
 | Add Image to cloud server and URL to Image Table in DB | 6 | 5 ||
@@ -99,34 +142,62 @@ Timebox Approximations
 | Style and add UI features, animations, carousel, etc | 12 | 16 | |
 | Total |  | 57 |  | 
 
+*Step 3 is where a lot of time was lost attempting to use images with Rails at which point the above process was abaonden.
+
+## Updated to suit Node/Express backend
+| Component | Priority | Estimated Time | Actual Time |
+|---|---| ---|---|
+| Create react app | 1 | .5 | .5 |
+| Install react dependencies | 2 | 1 | 1 |
+| Set up Express/Sequelize backend w/ routes | 3 | 3 | 4 |  
+| Test get data | 4 | .5 | .5 |
+| Render and size Map on page | 5 | 1 | 2 |
+| Build form for upload with dropzone | 6 | 1 |  5 |
+| Make Pin clickable to retrieve image URL and show image and image details | 7 | 3 | 2 |
+| Set up Header (w/Navbar) | 8 | 2 | 1 |
+| Build Show Modal | 9 | 2 | 4 |
+| Build Add Location Modal | 10 | 2 | 4 | 
+| Build Update Modal (incomplete) | 11 | 3 | 3 |
+| Style and add UI features, animations, carousel, etc | 12 | 16 | 12 |j
+| Add Corousel to Show Modal | 13 | 3 | 9 |
+| Total | All | 38 |  48 | 
 ---
 
-## Helper Functions
-Helper functions should be generic enought that they can be reused in other applications. Use this section to document all helper functions that fall into this category.
 
-#### SAMPLE.....
-| Function | Description | 
-| --- | :---: |  
-| Capitalize | This will capitalize the first letter in a string of text | 
-----
+
+
 ## Additional Libraries
  Use this section to list all supporting libraries and thier role in the project. 
  
  #### SAMPLE.....
 | Library | What it Does | 
 | --- | :---: |  
-| Ruby on Rails | Main application framework | 
+| Ruby on Rails | Main application framework | --- abandoned
+| Sequelize| WSGI | 
+| React | Javascript Frontend
+| Express | WSGI
 | MapboxGL | Used to display pics on map | 
+| React-Dropzone | Used to upload images |
+
 
 ---
 ## Code Snippet
-
-  
+```
+ //component mounts before props from modal are passed, so this is needed to set state for controlled form
+  componentDidUpdate(prevProps){
+      prevProps !== this.props &&  
+      this.setState({
+        city: this.props.location && this.props.location.city,
+        country: this.props.location && this.props.location.country,
+        summary: this.props.location && this.props.location.summary
+    })
+  }
+```
 ---
 
 
 ## Change Log
-  
+  The entire Rails backend was abondened in the middle of day 5 due to hassles with uploading images into the table. Due to time restrictions the decision was made to build an express back end and make up for as much lost time as possible.
 
 ---
 
@@ -134,8 +205,6 @@ Helper functions should be generic enought that they can be reused in other appl
 
 
 ## Issues and Resolutions
- Use this section to list of all major issues encountered and their resolution.
+    Attempted to deploy the rails backend on Heroku early in development in order to secure deployment for future git pushes. Unfortunately this proved frustration, cumbersome, and time consuming. Firstly, Heroku rejected the Ruby Version. After installing rvm (which was also a somewhat complicated issue), the Ruby version was switched to 2.6.0, which requested that bundler must be version 2.0. After switching to 2.0, the same error occured on the Heroku server. The bundler was updated on Heroku but to no avail. Several other gems had to be addressed, and after many many hours and countless google and stack overflow searches, Ruby was downgraded to 2.5.0 and the deployment was successful. Unfortuntely, the Rails backend was abandoned and swapped out for Node/Express for reasons mentioned above. 
 
-#### SAMPLE.....
-**ERROR**: app.js:34 Uncaught SyntaxError: Unexpected identifier                                
-**RESOLUTION**: Missing comma after first object in sources {} object
+

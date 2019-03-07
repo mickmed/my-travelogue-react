@@ -1,4 +1,4 @@
-.modal {
+.modalUpdate {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,7 +8,7 @@
   font-family: 'Archivo', sans-serif;
 }
 
-.modalMain {
+.modalMainUpdate {
   position:fixed; 
  
   background-image: linear-gradient( rgb(250, 248, 248), rgb(212, 212, 212));
@@ -19,15 +19,15 @@
   transform: translate(-50%,-50%);
 }
 
-.displayBlock {
+.displayBlockUpdate {
   display: block;
 }
 
-.displayNone {
+.displayNoneUpdate {
   display: none;
 }
 
-.toprow{
+.toprowUpdate{
   display:flex;
   justify-content: space-between;
   padding:0 1em;

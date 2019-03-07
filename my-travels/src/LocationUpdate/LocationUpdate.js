@@ -24,6 +24,7 @@ class LocationUpdate extends Component {
 
   handleEdit = async event => {
     event.preventDefault();
+    this.props.handleClose();
 
     
     let answer = window.confirm('Are you sure you want to edit?');
@@ -93,7 +94,7 @@ class LocationUpdate extends Component {
           </div>
 
           <button value="Submit" className="submit-btn" onClick={this.handleEdit}>
-            Upadate
+            Update
           </button>
         </form>
       </div>
