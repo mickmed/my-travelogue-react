@@ -1,18 +1,27 @@
 .homeComponent{
     display:flex;
-    flex-direction:row;
-    justify-content:space-around;
+    flex-direction:column;
+    /* justify-content:space-around; */
     
 }
 
 .mapWrapper, .locationsListWrapper{
     margin:2%;
-    width:100%;
+    flex:1;
 }
 
 .locationsListWrapper{
     background-image: linear-gradient(rgb(249, 252, 252), lightgrey);
     padding: .5% 2%;
-    max-height:525px;
+    max-height:100%;
+    flex: 1;
+    
 }
+
+@media only screen and (min-width: 1200px) {
+
+  .homeComponent{
+      flex-direction:row;
+  }
+  }
 

@@ -139,6 +139,7 @@ class Uploader extends Component {
               <div className="imagePreview">
                 {images.map((image, index) => (
                   <div>
+                    
                     <img key={index} src={image.imageBase64} />
                   </div>
                 ))}

@@ -4,8 +4,8 @@ header{
     background-color:rgb(175, 11, 11);
     height:55px;
     color: white;
-    font-size:30px;
-    padding:0 50px;
+    font-size:2em;
+    padding:0 5%;
 }
 
 nav{
@@ -21,4 +21,9 @@ header a{
 nav span{
     /* font-family: 'Archivo', sans-serif; */
     font-size:.9em;
+    display:none;
+}
+
+.icons{
+    font-size:.85em;
 }

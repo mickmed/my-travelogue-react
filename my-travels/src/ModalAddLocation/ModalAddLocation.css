@@ -12,15 +12,16 @@
     position:fixed; 
    
     background-image: linear-gradient( rgb(250, 248, 248), rgb(212, 212, 212));
-    width: 60%;
-    height: 60%;
-    top:40%;
+    width: 80%;
+    height: 95%;
+    top:50%;
     left:50%;
     transform: translate(-50%,-50%);
   }
   
   .displayBlockAddLocation {
     display: block;
+    
   }
   
   .displayNoneAddLocation {

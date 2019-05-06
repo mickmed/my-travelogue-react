@@ -2,7 +2,12 @@
 
   .sliderImage img{
     padding-top:1%;
-    height: 480px;
+    max-width:80%;
+    height: auto;
     margin: 0 auto;
+  }
+  .sliderImage{
+    width:80%;
+    height:auto;
   }
   

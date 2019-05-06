@@ -7,7 +7,7 @@ export default class SimpleSlider extends React.Component {
  
   render() {
     let locationInfo = this.props.locationInfo;
-console.log(locationInfo && locationInfo.city)
+// console.log(locationInfo && locationInfo.city)
     let imgObjs = [];
     for (let key in locationInfo) { 
       if (key === "images") {
@@ -32,7 +32,7 @@ console.log(locationInfo && locationInfo.city)
     };
     return (
       <div>
-      <p>{locationInfo && locationInfo.city}</p>
+      {/* <p>{locationInfo && locationInfo.city}</p> */}
       <Slider {...settings}>
       
         {imgObjs[0] &&

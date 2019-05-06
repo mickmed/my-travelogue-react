@@ -15,6 +15,8 @@ const navStyle = {
   left: 0,
   padding: "10px"
 };
+const screenWidth = window.innerWidth
+
 
 class Map extends React.Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class Map extends React.Component {
 
     this.state = {
       viewport: {
-        width: 900,
+        width: null,
         height: 550,
         latitude: 37.7577,
         longitude: -122.4376,
@@ -37,6 +39,26 @@ class Map extends React.Component {
       locationInfo: null
     };
   }
+
+  componentDidMount() {
+    const AppDims = document.querySelector(".App")
+    // const AppHeight = document.querySelector(".App")
+    console.log(AppDims.offsetWidth)
+    // let viewport = {...this.state.viewport}
+    // viewport.width = AppWidth.offsetWidth
+
+    this.setState({
+      viewport: {
+            ...this.state.viewport,
+            width: '100%',
+            height: AppDims.offsetHeight/1.2
+      }
+  })
+    
+  }
+
+
+
   hideModalAdd = () => {
     this.setState({ showModalAdd: false });
   };
@@ -95,6 +117,7 @@ class Map extends React.Component {
   }
   render() {
     const locations = this.props.locations;
+    // console.log(this.state.viewport)
     return (
       <div>
         <ReactMapGL

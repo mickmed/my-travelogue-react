@@ -7,10 +7,11 @@ const Header = () => {
     return (
       <header>
         <nav>
-          <a href = "">My Travels</a>
+          <a href="./">My Travels</a>
           <span>pin your memories to the map</span>
           
-          <div>
+          <div className='icons'>
+          
           ⭐️
           📖
           🕛
