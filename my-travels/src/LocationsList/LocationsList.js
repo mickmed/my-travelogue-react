@@ -9,7 +9,7 @@ class LocationsList extends Component {
       showModalUpdate: false,
       location: null,
       isFavorite: false,
-      faves: null
+      isFave: null
     };
   }
 
@@ -25,19 +25,24 @@ class LocationsList extends Component {
 
   favClick = (loc) => {
     console.log(loc)
-    
-    faves.push(loc)
-    console.log(faves)
-    this.setState({faves:faves})
+    if (faves.includes(loc)) {
+      let fav = faves.indexOf(loc)
+      faves.splice(fav, 1)
+    } else {
+      faves.push(loc)
+      console.log(faves)
+      this.setState({ faves: faves })
+    }
+
   }
 
-  renderFaves=(locations, faves)=>{
+  renderFaves = (locations, faves) => {
     console.log(locations, faves)
-    return(
-     locations &&
+    return (
+      locations &&
       locations.map((location, index) => (
         faves.includes(location) &&
-       
+
         <div
           key={index}
           className="location"
@@ -72,31 +77,39 @@ class LocationsList extends Component {
   }
 
 
-  renderAll=(locations)=>{
-    console.log(locations)
-    return(
-     locations &&
+  renderAll = (locations) => {
+    // console.log(locations)
+    return (
+
+      locations &&
       locations.map((location, index) => (
-        // this.state.faves&&this.state.faves.includes(location)? 
-       
+
+
         <div
           key={index}
           className="location"
           onClick={() => this.showModalUpdate(location)}
         >
-          <div>
-            <p>
-              {location.city}, <span className="stubborn">{location.country}</span>
+          <div className='left-panel'>
+            <p className="location-name">
+              {location.city},
 
             </p>
-            <div className='icons-wrapper'>
-              <div className='favStar' name={'name'} value={location.city} onClick={() => this.favClick(location)}>⭐️
-              </div>
 
-              <div className='pencil' name={'name'} value={location.city} onClick={() => this.showModalUpdate(location)}>✏️
-            </div>
-            </div>
 
+
+            <div className='icons'>
+              <span className='icons-wrapper'>
+                <span className='favStar' name={'name'} value={location.city} onClick={() => this.favClick(location)}> {this.state.faves && this.state.faves.includes(location) ? <span>🌟</span> : <span>⭐</span>}
+                </span>
+
+                <span className='pencil' name={'name'} value={location.city} onClick={() => this.showModalUpdate(location)}><span>✏️</span>
+                </span>
+
+
+              </span>
+              <span className="stubborn">{location.country}</span>
+            </div>
           </div>
           <img
             src={
@@ -107,25 +120,22 @@ class LocationsList extends Component {
           />
 
 
-        </div>
+        </div >
       ))
     )
   }
 
   render() {
     const { locations } = this.props;
-    console.log(this.state.faves)
-    // const blah = this.renderFaves(locations)
-    // locations && locations.map((loc)=>{
-    //   if(this.state.faves&&this.state.faves.includes(loc)){
-    //     console.log('hi')
-    //   }
-    // })
+    console.log(this.props)
     return (
       <div className="locationsList">
-      {this.state.faves&&this.state.faves&&this.renderFaves(locations, this.state.faves&&this.state.faves)}
-      {this.renderAll(locations)}
-      
+
+        {this.props.renderFavsStatus ?
+          this.state.faves && this.state.faves && this.renderFaves(locations, this.state.faves && this.state.faves) :
+          this.renderAll(locations)}
+
+
         {/* <ModalUpdateLocation
           show={this.state.showModalUpdate}
           handleClose={this.hideModalUpdate}

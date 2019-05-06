@@ -41,7 +41,7 @@ class Home extends Component {
 
 
   render() {
-   
+  //  console.log(this.props)
     const { images } = this.state;
     const hasImages = images.length > 0;
     return (
@@ -57,7 +57,7 @@ class Home extends Component {
               />
             </div>
             <div className="locationsListWrapper">
-              <LocationsList key={this.state.locations} locations={this.state.locations} />{" "}
+              <LocationsList key={this.state.locations} locations={this.state.locations} renderFavsStatus={this.props.renderFavsStatus}/>{" "}
             </div>
           </div>
         )}

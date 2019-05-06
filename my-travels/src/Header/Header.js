@@ -3,26 +3,27 @@ import "./Header.css"
 // import { Link } from 'react-router-dom';
 
 
-const Header = () => {
-    return (
-      <header>
-        <nav>
-          <a href="./">My Travels</a>
-          <span>pin your memories to the map</span>
+const Header = (props) => {
+  return (
+    <header>
+      <nav>
+        <a href="./">My Travels</a>
+        {/* <span>pin your memories to the map</span> */}
+
+        <div className='icons'>
+
+          <span className="list-all" value="all" onClick={props.renderList}>🌎</span>
+          <span className="favs-icon" value="favs" onClick={props.renderList}>⭐️</span>
           
-          <div className='icons'>
-          
-          ⭐️
-          📖
-          🕛
-          </div>
-          {/* <Link to={'/'}>Home </Link> */}
-          {/* <Link className="navbar-item" to={'/createmovie'}>Add Location </Link> */}
-          
-        </nav>
-      </header>
-      
-    )
+          <span className="date-order">🕛</span>
+          <span className="diary">📖</span>
+        </div>
+
+
+      </nav>
+    </header>
+
+  )
 }
 
 export default Header;

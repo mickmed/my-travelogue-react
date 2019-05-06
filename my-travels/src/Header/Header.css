@@ -11,6 +11,7 @@ header{
 nav{
     display:flex;
     justify-content: space-between;
+    height:100%;
 }
 
 header a{
@@ -18,12 +19,10 @@ header a{
     color:white;
 }
 
-nav span{
-    /* font-family: 'Archivo', sans-serif; */
-    font-size:.9em;
-    display:none;
-}
+
 
 .icons{
-    font-size:.85em;
+    font-size:1em;
+    max-height:100%;
+    /* padding-bottom:10%; */
 }
