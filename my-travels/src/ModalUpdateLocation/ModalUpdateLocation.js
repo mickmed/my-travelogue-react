@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./ModalUpdateLocation.css";
 import LocationUpdate from "../LocationUpdate/LocationUpdate";
 import Axios from 'axios'
+import Uploader from '../Uploader/Uploader.js'
 
 class ModalUpdateLocation extends Component {
   constructor(props) {
@@ -17,23 +18,23 @@ class ModalUpdateLocation extends Component {
         "http://localhost:3000/locations/" +
           parseInt(event.target.getAttribute("data-location-index"))
       );
-      // this.getGames();
+      
     } catch (err) {
       console.log(err);
     }
   };
 
   render() {
-    
-    const showHideClassName = this.props.show
-      ? "modalUpdate displayBlockUpdate"
-      : "modalUpdate displayBlockUpdate";
+    console.log(this.props)
+    // const showHideClassName = this.props.show
+    //   ? "modalUpdate displayBlockUpdate"
+    //   : "modalUpdate displayNoneUpdate";
     return (
-      <div className={showHideClassName}>
-        <section className="modalMainUpdate">
-          {this.props.children}
-          <LocationUpdate location={this.props.location} handleClose={this.props.handleClose}/>
-          <button onClick={this.props.handleClose}>close</button>
+      <div className="modalUpdate" >
+        <section className="updateModal">
+          <p>{'Update Location'}</p>
+          <Uploader  location={this.props.location} handleClose={this.props.handleClose} passer={'modalUpdate'} getLocations={this.props.getLocations}/>
+          <button className="close-button" onClick={this.props.handleClose}>close</button>
         
         <form
           className="deleteForm"
@@ -44,6 +45,7 @@ class ModalUpdateLocation extends Component {
             Delete
           </button>
         </form>
+        
         </section>
       </div>
     );

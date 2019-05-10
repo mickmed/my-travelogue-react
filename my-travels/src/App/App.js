@@ -28,7 +28,7 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state.renderFavsStatus)
+    // console.log(this.state.renderFavsStatus)
     return (
       <div className="App">
         <Header renderList={this.renderList} />

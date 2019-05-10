@@ -5,6 +5,7 @@ import MapPin from "./MapPin";
 import LocationInfo from "./LocationInfo.js";
 import ModalAddLocation from "../ModalAddLocation/ModalAddLocation";
 import ModalShowPhotos from "../ModalShowPhotos/ModalShowPhotos";
+import "./Map.css"
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoibWlja21lZCIsImEiOiJjanFzdTVtZjEwMnY0NDJzM2g4MXNuNTM0In0.VDbqZxEh0hxXAixRjS9FzA";
@@ -24,8 +25,9 @@ class Map extends React.Component {
 
     this.state = {
       viewport: {
-        width: null,
-        height: 550,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        
         latitude: 37.7577,
         longitude: -122.4376,
         zoom: 1
@@ -43,21 +45,37 @@ class Map extends React.Component {
   componentDidMount() {
     const AppDims = document.querySelector(".App")
     // const AppHeight = document.querySelector(".App")
-    console.log(AppDims.offsetWidth)
-    // let viewport = {...this.state.viewport}
-    // viewport.width = AppWidth.offsetWidth
+    // console.log(AppDims.offsetWidth)
+    console.log(AppDims.offsetHeight, AppDims.offsetWidth)
+    if (AppDims.offsetWidth < 900 && AppDims.offsetWidth < AppDims.offsetHeight) {
+      console.log('here')
 
-    this.setState({
-      viewport: {
-            ...this.state.viewport,
-            width: '100%',
-            height: AppDims.offsetHeight/1.2
-      }
-  })
-    
+      this.setState({
+        viewport: {
+          ...this.state.viewport,
+          width: '100%',
+          height: AppDims.offsetHeight / 2 + 'px',
+          appDims: AppDims
+        }
+      })
+    }
+    else{
+      this.setState({
+        viewport: {
+          ...this.state.viewport,
+          width: '100%',
+          height: AppDims.offsetHeight / 1.25 + 'px',
+          appDims: AppDims,
+        }
+      })
+    }
+    window.addEventListener('resize', this._resize);
+    this._resize();
   }
 
-
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._resize);
+  }
 
   hideModalAdd = () => {
     this.setState({ showModalAdd: false });
@@ -115,18 +133,43 @@ class Map extends React.Component {
       )
     );
   }
+
+  _updateViewport = viewport => {
+    
+    // const {width, height, ...etc} = viewport
+    // console.log(width, height, etc)
+    this.setState({viewport: viewport})
+  };
+  _onViewportChange = (viewport) => {
+    this.setState({
+      viewport: { ...this.state.viewport, ...viewport }
+    });
+  }
+
+  _resize = () => {
+    const AppDims = document.querySelector(".mapWrapper")
+    console.log(AppDims.offsetWidth)
+    this._onViewportChange({
+      width: AppDims.offsetWidth,
+      height: AppDims.offsetHeight - AppDims.offsetHeight/10
+    });
+  }
+
   render() {
     const locations = this.props.locations;
     // console.log(this.state.viewport)
+    let {viewport} = this.state
     return (
-      <div>
-        <ReactMapGL
+      <div className="map-wrap">
+        <ReactMapGL className="mapb"
           // key={this.state.random}
+      
           {...this.state.viewport}
-          onViewportChange={viewport => this.setState({ viewport })}
           mapboxApiAccessToken={MAPBOX_TOKEN}
+          // onViewportChange={this._updateViewport}
+          onViewportChange={viewport => this._onViewportChange(viewport)}
           mapStyle="mapbox://styles/mapbox/streets-v9"
-          containerStyle={{ height: "100%", width: "100%" }}
+          // containerStyle={{ height: "100%", width: "100%" }}
           //   onStyleLoad={this.handleStyleLoad}
           attributionControl={false}
           onClick={this._onClickMap}
@@ -139,7 +182,7 @@ class Map extends React.Component {
             </Marker>
           )}
           <div className="nav" style={navStyle}>
-            <NavigationControl onViewportChange={this._updateViewport} />
+            <NavigationControl onViewportChange={viewport => this.onViewportChange(viewport)} />
           </div>
         </ReactMapGL>
 

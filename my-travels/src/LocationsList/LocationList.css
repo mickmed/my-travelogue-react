@@ -1,10 +1,11 @@
 .locationsListWrapper {
   overflow: hidden;
-
-  
   overflow-y: auto;
+  
 }
-
+.locationsList{
+  /* max-height:10em; */
+}
 .location {
   display: flex;
   justify-content: space-between;
@@ -12,18 +13,19 @@
   font-family: "Parisienne", serif;
   /* font-size: 2em; */
   margin-block-start:0;
-  /* background-image: linear-gradient(rgb(249, 252, 252), rgb(245, 243, 243)); */
+  background-image: linear-gradient(rgb(249, 252, 252, .5), rgb(245, 240, 240, .5));
   border-bottom:.3px solid rgb(249, 252, 252);
   margin-bottom:5%;
+  
 }
 
 .location-name{
-  font-size: 3em;
+  font-size: 2em;
   margin:0;
 }
 
 .stubborn {
-  font-size: 2em;
+  font-size: 1.3em;
 }
 
 img {
@@ -31,9 +33,9 @@ img {
 }
 
 .icons-wrapper{
-  font-size:20px;
+  font-size:16px;
   /* display:flex; */
-  letter-spacing: 1em;
+  letter-spacing: .5em;
   
 }
 

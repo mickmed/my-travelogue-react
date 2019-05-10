@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
+import './LocationUpdate.css'
 
 class LocationUpdate extends Component {
   constructor(props) {
@@ -60,10 +61,10 @@ class LocationUpdate extends Component {
    
     return (
       <div className="editLocation">
-        <h2 className="title">Edit Location</h2>
+        {/* <h2 className="title">Edit Location</h2> */}
         <form onChange={this.handleChange} onSubmit={this.handleEdit} id="changeForm">
           <div className="field">
-            <label className="city">City: </label>
+            {/* <label className="city">City: </label> */}
             <input
               type="text"
               placeholder="City"
@@ -73,7 +74,7 @@ class LocationUpdate extends Component {
             />
           </div>
           <div className="field">
-            <label className="country">Country </label>
+            {/* <label className="country">Country </label> */}
             <input
               type="text"
               placeholder="country"
@@ -83,7 +84,7 @@ class LocationUpdate extends Component {
             />
           </div>
           <div className="field">
-            <label className="name">Summary: </label>
+            {/* <label className="name">Summary: </label> */}
             <textarea
               type="text"
               placeholder="Summary"

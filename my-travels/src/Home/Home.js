@@ -51,13 +51,15 @@ class Home extends Component {
           <div key={this.state.random} className="homeComponent">
             <div className="mapWrapper">
               <Map
+                className="map"
                 key = {this.state.locations}
                 locations={this.state.locations}
                 getLocations={this.getLocations}
               />
             </div>
             <div className="locationsListWrapper">
-              <LocationsList key={this.state.locations} locations={this.state.locations} renderFavsStatus={this.props.renderFavsStatus}/>{" "}
+              <LocationsList key={this.state.locations} locations={this.state.locations} renderFavsStatus={this.props.renderFavsStatus}
+              getLocations = {this.getLocations}/>{" "}
             </div>
           </div>
         )}
