@@ -3,23 +3,22 @@ import Dropzone from "react-dropzone";
 import "./Uploader.css";
 import Axios from "axios";
 
-
 class Uploader extends Component {
   constructor(props) {
     super(props);
-  
-  this.state = {
-    location: this.props.location,
-    id: this.props.location && this.props.location.id,
-    city: this.props.location && this.props.location.city,
-    country: this.props.location && this.props.location.country,
-    summary: this.props.location && this.props.location.summary,
-    images: this.props.location && this.props.location.images || [],
-    images_new: [], 
-    previewImages: [],
-    submitted: false
-  };
-}
+    this.state = {
+      uploading: false,
+      location: this.props.location,
+      id: this.props.location && this.props.location.id,
+      city: this.props.location && this.props.location.city,
+      country: this.props.location && this.props.location.country,
+      summary: this.props.location && this.props.location.summary,
+      images: this.props.location && this.props.location.images || [],
+      images_new: [], 
+      previewImages: [],
+      submitted: false
+    };
+  }
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -28,11 +27,11 @@ class Uploader extends Component {
 
   handleUpdate = async event => {
     event.preventDefault();
-    this.props.handleClose();
-    
+    this.setState({uploading:true})
+
     return (
       await Axios.put(
-        "http://localhost:3000/locations/" + this.state.location.id,
+        "https://my-travelogue.herokuapp.com/locations/" + this.state.location.id,
         {
           city: this.state.city,
           country: this.state.country,
@@ -49,6 +48,10 @@ class Uploader extends Component {
         }
       )
         .then((res) => this.props.getLocations())
+        .then((res) => this.props.handleClose())    
+        .then((res) => this.setState({uploading: false}))
+
+
     );
   }
 
@@ -60,7 +63,7 @@ class Uploader extends Component {
     //sending data to server
     return (
       await Axios.post(
-        "http://localhost:3000/locations",
+        "https://my-travelogue.herokuapp.com/locations",
         {
           city: this.state.city,
           country: this.state.country,
@@ -76,7 +79,7 @@ class Uploader extends Component {
           }
         }
       )
-        // .then((res) => this.props.getLocations())
+        .then((res) => this.props.getLocations())
     );
   };
 
@@ -96,13 +99,10 @@ class Uploader extends Component {
     accepted.forEach(file => {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-
-       
           this.setState(state => ({
             images: [
               ...state.images,
-              {
-                
+              {                
                 name: file.name,
                 imageBase64: reader.result,
                 locationId: this.state.id
@@ -126,17 +126,12 @@ class Uploader extends Component {
   };
 
   deletePhoto = async (e) => {
-    
-    
     let id = e.target.getAttribute('id')
-  
     let name = e.target.getAttribute('value')
    
     try{
-      const deleteImage = await Axios.delete('http://localhost:3000/images/' + id)
+      const deleteImage = await Axios.delete('https://my-travelogue.herokuapp.com/images/' + id)
       
-    
-
       let images = this.state.images.filter((elem)=>{
         
         if(elem.name !== name){
@@ -146,7 +141,6 @@ class Uploader extends Component {
       })
       this.setState({images: images})
 
-
       let images_new = this.state.images_new.filter((elem)=>{
       
         if(elem.name !== name){
@@ -155,14 +149,15 @@ class Uploader extends Component {
           return e
         }
       })
-      this.setState({images_new: images_new})
-      console.log(images, images_new);
+       this.setState({images_new: images_new})
+          
+      
+      // console.log(images, images_new);
       
     }
     catch(err){
       console.log(err)
     }
-    
   }
 
   render() {
@@ -206,29 +201,29 @@ class Uploader extends Component {
           </div>
 
           <div className="dropzoneWrapper">
-          <div className="dropzone-and-button">
-            <Dropzone
-              maxSize={2000000}
-              accept="image/jpeg, image/png"
-              onDrop={this.onDrop}
-            >
-              {({ getRootProps, getInputProps, isDragActive }) => {
-                return (
-                  <div {...getRootProps()} className="dropzone">
-                    <input {...getInputProps()} />
-                    {isDragActive ? (
-                      <p>Drop files here...</p>
-                    ) : (
-                        <p>Drop images here, or click to upload.</p>
-                      )}
-                  </div>
-                );
-              }}
-            </Dropzone>
+            <div className="dropzone-and-button">
+              <Dropzone
+                maxSize={2000000}
+                accept="image/jpeg, image/png"
+                onDrop={this.onDrop}
+              >
+                {({ getRootProps, getInputProps, isDragActive }) => {
+                  return (
+                    <div {...getRootProps()} className="dropzone">
+                      <input {...getInputProps()} />
+                      {isDragActive ? (
+                        <p>Drop files here...</p>
+                      ) : (
+                          <p>Drop images here, or click to upload.</p>
+                        )}
+                    </div>
+                  );
+                }}
+              </Dropzone>  
 
-            <div className="button">
-              <button type="submit">Submit</button>
-            </div>
+              <div className="button">
+                <button type="submit">{this.state.uploading?'...loading':'Submit'}</button>
+              </div>
             </div>
             {hasImages && (
               <div className="imagePreview">

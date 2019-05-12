@@ -12,16 +12,20 @@ class ModalUpdateLocation extends Component {
 
   deleteLocation = async event => {
     event.preventDefault();
-    
+    console.log(event.target.getAttribute("data-location-index"))
     try {
       const deleteLocation = await Axios.delete(
-        "http://localhost:3000/locations/" +
+        
+        "https://my-travelogue.herokuapp.com/locations/" +
           parseInt(event.target.getAttribute("data-location-index"))
-      );
+      )
       
+      .then((res) => this.props.getLocations())
+      .then((res) => this.props.handleClose())
     } catch (err) {
       console.log(err);
     }
+    
   };
 
   render() {

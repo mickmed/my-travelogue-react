@@ -22,7 +22,7 @@ class Home extends Component {
   getLocations = async (req, res) => {
   
     try {
-      const fetchLocations = await Axios("http://localhost:3000/locations");
+      const fetchLocations = await Axios("https://my-travelogue.herokuapp.com/locations");
       
       const locations = fetchLocations.data;
       this.setState({

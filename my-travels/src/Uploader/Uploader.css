@@ -82,7 +82,7 @@
 
 .imagePreview{
     display:flex;
-    height:20%;
+    height:10%;
     max-height:20%;
     margin:2% 0;
     flex-wrap:wrap;
@@ -92,6 +92,12 @@
 .img-wrapper{
   height:100%;
   position:relative;
+  margin:0 .5%;
+  
+}
+
+.img-wrapper img{
+  height: 3em;
 }
 .fa-times-circle{
   position:absolute;
@@ -103,13 +109,17 @@
   
 }
 
-@media only screen and (max-height: 400px) {
-
-
-
-.addLocationForm input[type="text"] {
-  height: 2em;
+@media only screen and (min-width: 900px) {
+  .img-wrapper img{
+    height: 7em;
+  }
 }
+
+
+@media only screen and (max-height: 400px) {
+  .addLocationForm input[type="text"] {
+     height: 2em;
+  }
 
   .addLocationForm input[type="text"] {
     height: 1em;
