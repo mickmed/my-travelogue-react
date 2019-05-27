@@ -27,8 +27,8 @@ class Map extends React.Component {
       viewport: {
         width: window.innerWidth,
         height: window.innerHeight,
-        
-        latitude:  this.props.clickedLocation && this.props.clickedLocation.latitude || this.props.locations[0].latitude,
+
+        latitude: this.props.clickedLocation && this.props.clickedLocation.latitude || this.props.locations[0].latitude,
         longitude: this.props.clickedLocation && this.props.clickedLocation.longitude || this.props.locations[0].longitude,
         zoom: 1
       },
@@ -49,7 +49,7 @@ class Map extends React.Component {
     // console.log(AppDims.offsetWidth)
     console.log(AppDims.offsetHeight, AppDims.offsetWidth)
     if (AppDims.offsetWidth < 900 && AppDims.offsetWidth < AppDims.offsetHeight) {
-      
+
 
       this.setState({
         viewport: {
@@ -57,21 +57,21 @@ class Map extends React.Component {
           width: '100%',
           height: AppDims.offsetHeight / 2 + 'px',
           appDims: AppDims,
-        
-       
+
+
         }
       })
     }
-    else{
+    else {
       this.setState({
         viewport: {
           ...this.state.viewport,
           width: '100%',
           height: AppDims.offsetHeight / 1.25 + 'px',
           appDims: AppDims,
-         
 
-          
+
+
         }
       })
     }
@@ -83,19 +83,42 @@ class Map extends React.Component {
     window.removeEventListener('resize', this._resize);
   }
 
-  componentWillReceiveProps(nextProps){
-    console.log(this.props.clickedLocation, nextProps.clickedLocation)
-    this.setState({
-      viewport: {
-        ...this.state.viewport,
-        latitude: nextProps.clickedLocation.latitude,
-        longitude: nextProps.clickedLocation.longitude
-      
-     
-      }
-    })
-   
+ 
+
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log( this.props.clickedLocation && this.props.clickedLocation.latitude)
+  //   if (prevProps !== this.props) {
+  //     prevProps.clickedLocation &&
+  //       this.setState({
+  //         viewport: {
+  //           ...this.state.viewport,
+  //           latitude: this.props.clickedLocation && this.props.clickedLocation.latitude,
+  //           longitude: this.props.clickedLocation && this.props.clickedLocation.longitude
+
+
+  //         }
+  //       })
+  //   }
+  // }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps.clickedLocation && nextProps.clickedLocation.latitude, prevState.viewport.latitude)
+    if (nextProps.clickedLocation && nextProps.clickedLocation.latitude !== prevState.viewport.latitude) {
+      return ({
+        viewport: {
+          ...prevState.viewport,
+          latitude: nextProps.clickedLocation && nextProps.clickedLocation.latitude,
+          longitude: nextProps.clickedLocation && nextProps.clickedLocation.longitude
+
+
+        }
+      }) // <- this is setState equivalent
+    }
+
+
   }
+
 
   hideModalAdd = () => {
     this.setState({ showModalAdd: false });
@@ -118,10 +141,10 @@ class Map extends React.Component {
 
   _renderMarker = (location, index) => {
     let color, size
-    if(location === this.props.clickedLocation){
+    if (location === this.props.clickedLocation) {
       color = "blue"
       size = 30
-    }else{
+    } else {
       color = "green"
       size = 20
     }
@@ -135,8 +158,8 @@ class Map extends React.Component {
           <MapPin
             size={size}
             // onClick={() => this.setState({ popupInfo: location })}
-            shoonga = {this.props.clickedLocationObject}
-            color = {color}
+            shoonga={this.props.clickedLocationObject}
+            color={color}
             onClick={() => this._onClickPin(location)}
           />
         </div>
@@ -163,40 +186,45 @@ class Map extends React.Component {
     );
   }
 
-  _updateViewport = viewport => {
-    
-    // const {width, height, ...etc} = viewport
-    // console.log(width, height, etc)
-    this.setState({viewport: viewport})
-  };
+  // _updateViewport = viewport => {
+
+  //   // const {width, height, ...etc} = viewport
+  //   // console.log(width, height, etc)
+  //   this.setState({ viewport: viewport })
+  // };
   _onViewportChange = (viewport) => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     });
   }
+  _updateViewport = viewport => {
+    this.setState({ viewport });
+  };
 
   _resize = () => {
     const AppDims = document.querySelector(".mapWrapper")
     console.log(AppDims.offsetWidth)
     this._onViewportChange({
       width: AppDims.offsetWidth,
-      height: AppDims.offsetHeight - AppDims.offsetHeight/10
+      height: AppDims.offsetHeight - AppDims.offsetHeight / 10
     });
   }
 
   render() {
     const locations = this.props.locations;
     console.log(this.props.clickedLocation && this.props.clickedLocation.latitude || this.props.locations[0].latitude)
-    let {viewport} = this.state
+    let { viewport } = this.state
     return (
       <div className="map-wrap">
         <ReactMapGL className="mapb"
           // key={this.state.random}  
-      
+
           {...this.state.viewport}
           mapboxApiAccessToken={MAPBOX_TOKEN}
           // onViewportChange={this._updateViewport}
-          onViewportChange={viewport => this._onViewportChange(viewport)}
+          // onViewportChange={viewport => this._onViewportChange(viewport)}
+          onViewportChange={this._updateViewport}
+
           mapStyle="mapbox://styles/mapbox/streets-v9"
           // containerStyle={{ height: "100%", width: "100%" }}
           //   onStyleLoad={this.handleStyleLoad}
@@ -211,7 +239,7 @@ class Map extends React.Component {
             </Marker>
           )}
           <div className="nav" style={navStyle}>
-            <NavigationControl onViewportChange={viewport => this.onViewportChange(viewport)} />
+            <NavigationControl onViewportChange={this._updateViewport} />
           </div>
         </ReactMapGL>
 
