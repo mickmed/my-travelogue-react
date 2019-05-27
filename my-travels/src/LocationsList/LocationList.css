@@ -11,7 +11,7 @@
   justify-content: space-between;
   align-items: center;
   font-family: "Parisienne", serif;
-  /* font-size: 2em; */
+  
   margin-block-start:0;
   background-image: linear-gradient(rgb(249, 252, 252, .5), rgb(245, 240, 240, .5));
   border-bottom:.3px solid rgb(249, 252, 252);
@@ -19,17 +19,22 @@
   
 }
 
+.clickedLocation{
+  background-image: linear-gradient(rgba(218, 106, 102, 0.5), rgb(245, 240, 240, .5));
+
+}
+
 .location-name{
-  font-size: 2em;
+  font-size: 1.2em;
   margin:0;
 }
 
 .stubborn {
-  font-size: 1.3em;
+  font-size: 1em;
 }
 
 img {
-  height: 6em;
+  height: 4em;
 }
 
 .icons-wrapper{

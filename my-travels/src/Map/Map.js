@@ -28,8 +28,8 @@ class Map extends React.Component {
         width: window.innerWidth,
         height: window.innerHeight,
         
-        latitude: 37.7577,
-        longitude: -122.4376,
+        latitude:  this.props.clickedLocation && this.props.clickedLocation.latitude || this.props.locations[0].latitude,
+        longitude: this.props.clickedLocation && this.props.clickedLocation.longitude || this.props.locations[0].longitude,
         zoom: 1
       },
       pinLong: 0,
@@ -43,19 +43,22 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
+    console.log('here')
     const AppDims = document.querySelector(".App")
     // const AppHeight = document.querySelector(".App")
     // console.log(AppDims.offsetWidth)
     console.log(AppDims.offsetHeight, AppDims.offsetWidth)
     if (AppDims.offsetWidth < 900 && AppDims.offsetWidth < AppDims.offsetHeight) {
-      console.log('here')
+      
 
       this.setState({
         viewport: {
           ...this.state.viewport,
           width: '100%',
           height: AppDims.offsetHeight / 2 + 'px',
-          appDims: AppDims
+          appDims: AppDims,
+        
+       
         }
       })
     }
@@ -66,6 +69,9 @@ class Map extends React.Component {
           width: '100%',
           height: AppDims.offsetHeight / 1.25 + 'px',
           appDims: AppDims,
+         
+
+          
         }
       })
     }
@@ -75,6 +81,20 @@ class Map extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this._resize);
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log(this.props.clickedLocation, nextProps.clickedLocation)
+    this.setState({
+      viewport: {
+        ...this.state.viewport,
+        latitude: nextProps.clickedLocation.latitude,
+        longitude: nextProps.clickedLocation.longitude
+      
+     
+      }
+    })
+   
   }
 
   hideModalAdd = () => {
@@ -97,6 +117,14 @@ class Map extends React.Component {
   };
 
   _renderMarker = (location, index) => {
+    let color, size
+    if(location === this.props.clickedLocation){
+      color = "blue"
+      size = 30
+    }else{
+      color = "green"
+      size = 20
+    }
     return (
       <Marker
         key={index}
@@ -105,9 +133,10 @@ class Map extends React.Component {
       >
         <div className="treepin">
           <MapPin
-            size={20}
+            size={size}
             // onClick={() => this.setState({ popupInfo: location })}
-
+            shoonga = {this.props.clickedLocationObject}
+            color = {color}
             onClick={() => this._onClickPin(location)}
           />
         </div>
@@ -157,12 +186,12 @@ class Map extends React.Component {
 
   render() {
     const locations = this.props.locations;
-    // console.log(this.state.viewport)
+    console.log(this.props.clickedLocation && this.props.clickedLocation.latitude || this.props.locations[0].latitude)
     let {viewport} = this.state
     return (
       <div className="map-wrap">
         <ReactMapGL className="mapb"
-          // key={this.state.random}
+          // key={this.state.random}  
       
           {...this.state.viewport}
           mapboxApiAccessToken={MAPBOX_TOKEN}

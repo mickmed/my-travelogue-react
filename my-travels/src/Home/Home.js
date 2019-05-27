@@ -27,21 +27,30 @@ class Home extends Component {
       const locations = fetchLocations.data;
       this.setState({
         locations: locations,
-        loading: true
+        loading: true,
+        clickedLocation: null
       });
+      // console.log(locations)
     } catch (err) {
       console.log(err);
     }
   };
 
+  getClickedLocation = (location) => {
+    console.log('here')
+    console.log(location)
+    this.setState({clickedLocation:location})
+  }
+
   componentDidMount = async () => {
+    console.log('here')
     await this.getLocations();
   };
 
 
 
   render() {
-  //  console.log(this.props)
+  //  console.log('home', this.state.locations)
     const { images } = this.state;
     const hasImages = images.length > 0;
     return (
@@ -55,11 +64,13 @@ class Home extends Component {
                 key = {this.state.locations}
                 locations={this.state.locations}
                 getLocations={this.getLocations}
+                clickedLocation = {this.state.clickedLocation}
               />
             </div>
             <div className="locationsListWrapper">
-              <LocationsList key={this.state.locations} locations={this.state.locations} renderFavsStatus={this.props.renderFavsStatus}
-              getLocations = {this.getLocations}/>{" "}
+              <LocationsList key={this.state.locations} locations={this.state.locations} renderFavsStatus={this.props.renderFavsStatus} renderDateStatus={this.props.renderDateStatus}
+              getLocations = {this.getLocations}
+              clickedLocation = {this.getClickedLocation}/>
             </div>
           </div>
         )}

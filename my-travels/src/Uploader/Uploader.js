@@ -163,7 +163,7 @@ class Uploader extends Component {
   render() {
     const { images } = this.state;
     const hasImages = images.length > 0;
-    console.log(this.props)
+    // console.log(this.props)
 
     return (
       <div className="uploader">

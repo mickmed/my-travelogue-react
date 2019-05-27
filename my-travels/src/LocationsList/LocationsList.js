@@ -9,7 +9,8 @@ class LocationsList extends Component {
       showModalUpdate: false,
       location: null,
       isFavorite: false,
-      isFave: null
+      isFave: null,
+      locations: this.props.locations
     };
   }
 
@@ -28,14 +29,15 @@ class LocationsList extends Component {
       faves.splice(fav, 1)
     } else {
       faves.push(loc)
-      console.log(faves)
+      // console.log(faves)
       this.setState({ faves: faves })
     }
 
   }
 
   renderFaves = (locations, faves) => {
-    console.log(locations, faves)
+   
+    // console.log(locations, faves)
     return (
       locations &&
       locations.map((location, index) => (
@@ -46,8 +48,41 @@ class LocationsList extends Component {
   }
 
 
+
+  renderDateOrder = (locationsTemp) => {
+
+    console.log('locTemp',locationsTemp)
+    let locationsOrder = locationsTemp
+    console.log(locationsOrder)
+    function compare(a, b) {
+      // Use toUpperCase() to ignore character casing
+      const dateA = a.createdAt
+      const dateB = b.createdAt
+
+      let comparison = 0;
+      if (dateA > dateB) {
+        comparison = 1;
+      } else if (dateA < dateB) {
+        comparison = -1;
+      }
+      return comparison;
+    }
+
+    locationsOrder.sort(compare);
+    console.log(locationsOrder)
+    console.log(locationsTemp)
+    // this.setState({dateOrder: locations})
+    return (
+      locationsOrder.map((location, index) => (
+        this.renderList(location, index)
+      ))
+    )
+
+  }
+
+
   renderAll = (locations) => {
-    // console.log(locations)
+   
     return (
       locations &&
       locations.map((location, index) => (
@@ -56,13 +91,31 @@ class LocationsList extends Component {
     )
   }
 
-  renderList = (location, index) => (
+  renderClickedLocation = (location) => {
+    console.log(location)
+    this.props.clickedLocation(location)
+    this.setState({ClickedLocation:location})
+    
+    
+  }
 
-    <div
-      key={index}
-      className="location"
+  renderList = (location, index) => {
+    
+    let className
+    if(this.state.ClickedLocation === location){
+      className = "clickedLocation"
+     
+    } 
+
+    return(
+      <div
       
+      key={index}
+      className={`location ${className}`}
+      onClick={() => this.renderClickedLocation(location)}
+
     >
+      
       <div className='left-panel'>
         <p className="location-name">
           {location.city}
@@ -89,17 +142,31 @@ class LocationsList extends Component {
         alt={location.images[0].name}
       />
     </div >
-  )
+  
 
+
+    )
+  }
+  
+   
   render() {
     const { locations } = this.props;
-    console.log(this.props)
+    // console.log('fav', this.props.renderFavsStatus)
+    // console.log('date', this.props.renderDateStatus)
+    let locationsTemp = [...this.state.locations]
+    // console.log('state.loc', this.state.locations)
+    // console.log(locationsTemp)
     return (
       <div className="locationsList">
 
-        {this.props.renderFavsStatus ?
-          this.state.faves && this.state.faves && this.renderFaves(locations, this.state.faves && this.state.faves) :
-          this.renderAll(locations)}
+        {this.props.renderFavsStatus &&
+          this.state.faves && this.state.faves && this.renderFaves(locationsTemp, this.state.faves && this.state.faves)}  
+
+        {this.props.renderDateStatus &&
+          this.renderDateOrder(locationsTemp)}
+
+        {!this.props.renderFavsStatus && !this.props.renderDateStatus && 
+        this.renderAll(this.state.locations)}
 
         {this.state.showModalUpdate ?
           <ModalUpdateLocation
@@ -107,7 +174,7 @@ class LocationsList extends Component {
             location={this.state.location}
             getLocations={this.props.getLocations}
           >
-        
+
           </ModalUpdateLocation> : null}
       </div>
     );

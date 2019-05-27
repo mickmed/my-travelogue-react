@@ -25,4 +25,11 @@ header a{
     font-size:1em;
     max-height:100%;
     /* padding-bottom:10%; */
+    /* padding-bottom:50px; */
+    box-sizing:border-box;
+    transform: translate(0, -5px)
+}
+
+.icons span{
+    
 }

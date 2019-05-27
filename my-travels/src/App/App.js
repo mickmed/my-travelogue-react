@@ -8,7 +8,8 @@ import Home from "../Home/Home";
 
 class App extends Component {
   state = {
-    renderFavsStatus: false
+    renderFavsStatus: false,
+    renderDateStatus: false,
   }
 
 
@@ -23,16 +24,24 @@ class App extends Component {
         renderFavsStatus: false
       })
 
+    e.target.getAttribute('value') === 'date' ?
+      this.setState({
+        renderDateStatus: true
+      }) :
+      this.setState({
+        renderDateStatus: false
+      })
+
   }
 
 
 
   render() {
-    // console.log(this.state.renderFavsStatus)
+    console.log(this.state.renderFavsStatus)
     return (
       <div className="App">
         <Header renderList={this.renderList} />
-        <Home renderFavsStatus={this.state.renderFavsStatus} />
+        <Home renderFavsStatus={this.state.renderFavsStatus} renderDateStatus={this.state.renderDateStatus}/>
       </div>
     );
   }
