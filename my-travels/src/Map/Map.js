@@ -239,9 +239,9 @@ class Map extends React.Component {
             </Marker>
           )}
           <div className="nav" style={navStyle}>
-            <NavigationControl onViewportChange={this._updateViewport} />
+            <NavigationControl className="navigation" onViewportChange={this._updateViewport} />
           </div>
-        </ReactMapGL>
+        </ReactMapGL> 
 
         <ModalAddLocation
           show={this.state.showModalAdd}

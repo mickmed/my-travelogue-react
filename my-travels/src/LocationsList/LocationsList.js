@@ -20,7 +20,7 @@ class LocationsList extends Component {
     this.setState({ location: arr })
 
   };
-
+  
 
   favClick = (loc) => {
     console.log(loc)
@@ -127,6 +127,9 @@ class LocationsList extends Component {
             </span>
 
             <span className='pencil' name={'name'} value={location.city} onClick={() => this.showModalUpdate(location)}><span>✏️</span>
+            </span>
+
+            <span className='pencil' name={'name'} value={location.city} onClick={() => this.showModalUpdate(location)}><span>📖</span>
             </span>
 
 
