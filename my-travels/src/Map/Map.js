@@ -43,11 +43,11 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    console.log('here')
+    // console.log('here')
     const AppDims = document.querySelector(".App")
     // const AppHeight = document.querySelector(".App")
     // console.log(AppDims.offsetWidth)
-    console.log(AppDims.offsetHeight, AppDims.offsetWidth)
+    // console.log(AppDims.offsetHeight, AppDims.offsetWidth)
     if (AppDims.offsetWidth < 900 && AppDims.offsetWidth < AppDims.offsetHeight) {
 
 
@@ -103,7 +103,7 @@ class Map extends React.Component {
   // }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps.clickedLocation && nextProps.clickedLocation.latitude, prevState.viewport.latitude)
+    // console.log(nextProps.clickedLocation && nextProps.clickedLocation.latitude, prevState.viewport.latitude)
     if (nextProps.clickedLocation && nextProps.clickedLocation.latitude !== prevState.viewport.latitude) {
       return ({
         viewport: {
@@ -203,7 +203,7 @@ class Map extends React.Component {
 
   _resize = () => {
     const AppDims = document.querySelector(".mapWrapper")
-    console.log(AppDims.offsetWidth)
+    // console.log(AppDims.offsetWidth)
     this._onViewportChange({
       width: AppDims.offsetWidth,
       height: AppDims.offsetHeight - AppDims.offsetHeight / 10
@@ -212,7 +212,7 @@ class Map extends React.Component {
 
   render() {
     const locations = this.props.locations;
-    console.log(this.props.clickedLocation && this.props.clickedLocation.latitude || this.props.locations[0].latitude)
+    // console.log(this.props.clickedLocation && this.props.clickedLocation.latitude || this.props.locations[0].latitude)
     let { viewport } = this.state
     return (
       <div className="map-wrap">

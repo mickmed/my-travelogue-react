@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import "./Home.css";
-
+import { Route, Link } from "react-router-dom"
 import Map from "../Map/Map";
 import LocationsList from "../LocationsList/LocationsList";
+import Info from "../Info/Info"
 
 // import { Redirect } from "react-router-dom";
 
@@ -20,10 +21,10 @@ class Home extends Component {
     };
   }
   getLocations = async (req, res) => {
-  
+
     try {
       const fetchLocations = await Axios("https://my-travelogue.herokuapp.com/locations");
-      
+
       const locations = fetchLocations.data;
       this.setState({
         locations: locations,
@@ -39,7 +40,7 @@ class Home extends Component {
   getClickedLocation = (location) => {
     console.log('here')
     console.log(location)
-    this.setState({clickedLocation:location})
+    this.setState({ clickedLocation: location })
   }
 
   componentDidMount = async () => {
@@ -50,33 +51,61 @@ class Home extends Component {
 
 
   render() {
-  //  console.log('home', this.state.locations)
+    //  console.log('home', this.state.locations)
     const { images } = this.state;
     const hasImages = images.length > 0;
+    console.log(this.props.match.path)
+    console.log(`${this.props.match.path}/:id`)
+    const locationsList = 
+
+      <LocationsList key={this.state.locations} locations={this.state.locations} renderFavsStatus={this.props.renderFavsStatus} renderDateStatus={this.props.renderDateStatus}
+        getLocations={this.getLocations}
+        clickedLocation={this.getClickedLocation} />
+
+
+
     return (
       <div>
+
         {this.state.loading == false && "...loading"}
         {this.state.loading == true && (
-          <div key={this.state.random} className="homeComponent">
+          <div className="homeComponent">
             <div className="mapWrapper">
               <Map
                 className="map"
-                key = {this.state.locations}
+                key={this.state.locations}
                 locations={this.state.locations}
                 getLocations={this.getLocations}
-                clickedLocation = {this.state.clickedLocation}
+                clickedLocation={this.state.clickedLocation}
               />
             </div>
-            <div className="locationsListWrapper">
-              <LocationsList key={this.state.locations} locations={this.state.locations} renderFavsStatus={this.props.renderFavsStatus} renderDateStatus={this.props.renderDateStatus}
-              getLocations = {this.getLocations}
-              clickedLocation = {this.getClickedLocation}/>
-            </div>
+
+{/* 
+            <Link to={`${this.props.match.url}/locations`}>Locations</Link>
+
+            <Link to={`${this.props.match.url}/info`}>Info</Link> */}
+
+
+            <Route path={`${this.props.match.path}/locations`} render={() => <div className="locationsListWrapper">{locationsList}</div>}/> 
+          <Route path={`${this.props.match.path}/info`} render={() => <div className="locationsListWrapper"> <Info/></div>}/> 
+            <Route
+              exact
+              path={this.props.match.path}
+
+              render={() => <div className="locationsListWrapper">{locationsList}</div>}/>
+
+
+
           </div>
         )}
       </div>
     );
   }
+}
+
+function Topic({ match }) {
+  console.log('i')
+  return <h3>Requested Param: {match.params.id}</h3>;
 }
 
 export default Home;

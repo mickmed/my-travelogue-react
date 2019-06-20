@@ -6,31 +6,37 @@
 .locationsList{
   /* max-height:10em; */
 }
+
+
 .location {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: "Parisienne", serif;
+  font-family: 'Comfortaa', cursive;
   
   margin-block-start:0;
-  background-image: linear-gradient(rgb(249, 252, 252, .5), rgb(245, 240, 240, .5));
-  border-bottom:.3px solid rgb(249, 252, 252);
-  margin-bottom:5%;
-  
+  background-image: linear-gradient(to bottom, rgb(238, 236, 236), rgb(249, 252, 252, .5));
+    /* border-bottom:.3px solid rgb(249, 252, 252); */
+  margin-bottom:3%;
+  padding:1%;
+  /* box-shadow: .25px .25px  black; */
 }
 
 .clickedLocation{
   background-image: linear-gradient(rgba(218, 106, 102, 0.5), rgb(245, 240, 240, .5));
+  /* box-shadow: .25px .25px black; */
 
 }
 
 .location-name{
   font-size: 1.2em;
   margin:0;
+  margin-bottom:8%;
 }
 
 .stubborn {
   font-size: 1em;
+  font-family:'Parisienne', 'serif';
 }
 
 img {
@@ -42,8 +48,17 @@ img {
   /* display:flex; */
   letter-spacing: .5em;
   
+  
+}
+.icons{
+  margin-top:5%;
 }
 
 .left-panel{
+  display:flex;
+  flex-direction:column;
+  /* justify-content:space-between; */
+  margin-left:1%;
+
 
 }

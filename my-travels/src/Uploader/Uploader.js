@@ -109,6 +109,8 @@ class Uploader extends Component {
               }
             ]
           })) 
+
+          console.log(reader.result)
          this.setState(state => ({
             images_new: [
               ...state.images_new,

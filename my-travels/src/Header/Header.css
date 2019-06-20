@@ -21,7 +21,7 @@ header a{
 
 
 
-.icons{
+.header_icons{
     font-size:1em;
     max-height:100%;
     /* padding-bottom:10%; */
@@ -30,6 +30,8 @@ header a{
     transform: translate(0, -5px)
 }
 
-.icons span{
+.info{
+
+    margin-left:.25em;
     
 }
