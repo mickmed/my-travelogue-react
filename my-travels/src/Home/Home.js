@@ -87,7 +87,7 @@ class Home extends Component {
 
 
             <Route path={`${this.props.match.path}/locations`} render={() => <div className="locationsListWrapper">{locationsList}</div>}/> 
-          <Route path={`${this.props.match.path}/info`} render={() => <div className="locationsListWrapper"> <Info/></div>}/> 
+            <Route path={`${this.props.match.path}/info`} render={() => <div className="locationsListWrapper"> <Info/></div>}/> 
             <Route
               exact
               path={this.props.match.path}

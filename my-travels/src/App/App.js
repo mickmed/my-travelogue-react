@@ -6,7 +6,7 @@ import Map from "../Map/Map";
 import LocationsList from "../LocationsList/LocationsList";
 import Home from "../Home/Home";
 import Info from "../Info/Info"
-import { Route, Link } from "react-router-dom"
+import { Route, Link, Redirect} from "react-router-dom"
 import Test from "../Test/test.js"
 
 class App extends Component {
@@ -47,7 +47,7 @@ class App extends Component {
       <div className="App">
         <Header renderList={this.renderList} />
 
-        <Route path="/" render={(props) => <Home {...props}
+        <Route path="/" render={(props) => <Redirect to={"/home"} {...props}
           renderFavsStatus={this.state.renderFavsStatus}
           renderDateStatus={this.state.renderDateStatus}
         />} />
