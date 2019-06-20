@@ -46,7 +46,12 @@ class App extends Component {
     return (
       <div className="App">
         <Header renderList={this.renderList} />
-        {/* <Route path="/" render={(props)=> <Home {...props} renderFavsStatus={this.state.renderFavsStatus} renderDateStatus={this.state.renderDateStatus} />} /> */}
+
+        <Route path="/" render={(props) => <Home {...props}
+          renderFavsStatus={this.state.renderFavsStatus}
+          renderDateStatus={this.state.renderDateStatus}
+        />} />
+
 
         <Route path="/home" render={(props) => <Home {...props}
           renderFavsStatus={this.state.renderFavsStatus}
