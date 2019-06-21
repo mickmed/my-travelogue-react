@@ -8,6 +8,7 @@ import Home from "../Home/Home";
 import Info from "../Info/Info"
 import { Route, Link, Redirect} from "react-router-dom"
 import Test from "../Test/test.js"
+import ModalAddLocation from "../ModalAddLocation/ModalAddLocation"
 
 class App extends Component {
   state = {
@@ -47,10 +48,12 @@ class App extends Component {
       <div className="App">
         <Header renderList={this.renderList} />
 
+         <Route path="/upload" component={ModalAddLocation}/>
+{/* 
         <Route path="/" render={(props) => <Redirect to={"/home"} {...props}
           renderFavsStatus={this.state.renderFavsStatus}
           renderDateStatus={this.state.renderDateStatus}
-        />} />
+        />} />  */}
 
 
         <Route path="/home" render={(props) => <Home {...props}
@@ -60,7 +63,7 @@ class App extends Component {
 
         {/* <Route path="/homo" component={Homo} /> */}
 
-
+       
 
       </div>
     );
