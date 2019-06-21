@@ -49,11 +49,11 @@ class App extends Component {
         <Header renderList={this.renderList} />
 
          <Route path="/upload" component={ModalAddLocation}/>
-{/* 
+
         <Route path="/" render={(props) => <Redirect to={"/home"} {...props}
           renderFavsStatus={this.state.renderFavsStatus}
           renderDateStatus={this.state.renderDateStatus}
-        />} />  */}
+        />} /> 
 
 
         <Route path="/home" render={(props) => <Home {...props}
