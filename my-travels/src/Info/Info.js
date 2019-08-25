@@ -13,7 +13,7 @@ class Info extends Component {
 
     return (
       <div className="App">
-        Info PageInfoPageInfoPageInfoPage
+        Click on the map to add a new location. Click on the stars to save favorites. Click on the pins to review.
       </div>
     );
   }

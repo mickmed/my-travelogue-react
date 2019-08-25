@@ -5,6 +5,9 @@ import { Route, Link } from "react-router-dom"
 import Map from "../Map/Map";
 import LocationsList from "../LocationsList/LocationsList";
 import Info from "../Info/Info"
+import LocationAdd from "../LocationAdd/LocationAdd";
+import LocationUpdate from "../LocationUpdate/LocationUpdate";
+
 
 // import { Redirect } from "react-router-dom";
 
@@ -24,7 +27,7 @@ class Home extends Component {
 
     try {
       const fetchLocations = await Axios("https://my-travelogue.herokuapp.com/locations");
-
+      // console.log(fetchLocations)
       const locations = fetchLocations.data;
       this.setState({
         locations: locations,
@@ -38,13 +41,13 @@ class Home extends Component {
   };
 
   getClickedLocation = (location) => {
-    console.log('here')
+   
     console.log(location)
     this.setState({ clickedLocation: location })
   }
 
   componentDidMount = async () => {
-    console.log('here')
+    // console.log('here')
     await this.getLocations();
   };
 
@@ -54,15 +57,14 @@ class Home extends Component {
     //  console.log('home', this.state.locations)
     const { images } = this.state;
     const hasImages = images.length > 0;
-    console.log(this.props.match.path)
-    console.log(`${this.props.match.path}/:id`)
+ 
     const locationsList = 
 
       <LocationsList key={this.state.locations} locations={this.state.locations} renderFavsStatus={this.props.renderFavsStatus} renderDateStatus={this.props.renderDateStatus}
         getLocations={this.getLocations}
         clickedLocation={this.getClickedLocation} />
 
-
+    // console.log(this.props)
 
     return (
       <div>
@@ -80,11 +82,10 @@ class Home extends Component {
               />
             </div>
 
-{/* 
-            <Link to={`${this.props.match.url}/locations`}>Locations</Link>
+           
+            <Route path={`${this.props.match.path}/update_location`} render={(props) => <div className="locationsListWrapper">{<LocationUpdate {...props} getLocations={this.getLocations} />}</div>}/> 
 
-            <Link to={`${this.props.match.url}/info`}>Info</Link> */}
-
+            <Route path={`${this.props.match.path}/add_location`} render={(props) => <div className="locationsListWrapper">{<LocationAdd {...props} />}</div>}/> 
 
             <Route path={`${this.props.match.path}/locations`} render={() => <div className="locationsListWrapper">{locationsList}</div>}/> 
             <Route path={`${this.props.match.path}/info`} render={() => <div className="locationsListWrapper"> <Info/></div>}/> 
@@ -92,7 +93,7 @@ class Home extends Component {
               exact
               path={this.props.match.path}
 
-              render={() => <div className="locationsListWrapper">{locationsList}</div>}/>
+              render={() => <div className="locationsListWrapper">{locationsList}</div>}/> 
 
 
 

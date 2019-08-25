@@ -1,11 +1,12 @@
 import React from "react";
 import ReactMapGL, { Marker, Popup, NavigationControl } from "react-map-gl";
-import LocationsList from "../LocationsList/LocationsList";
+
 import MapPin from "./MapPin";
 import LocationInfo from "./LocationInfo.js";
-import ModalAddLocation from "../ModalAddLocation/ModalAddLocation";
+import LocationAdd from "../LocationAdd/LocationAdd";
 import ModalShowPhotos from "../ModalShowPhotos/ModalShowPhotos";
 import "./Map.css"
+import { Redirect, Link } from 'react-router-dom'
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoibWlja21lZCIsImEiOiJjanFzdTVtZjEwMnY0NDJzM2g4MXNuNTM0In0.VDbqZxEh0hxXAixRjS9FzA";
@@ -19,6 +20,7 @@ const navStyle = {
 const screenWidth = window.innerWidth
 
 
+
 class Map extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +29,6 @@ class Map extends React.Component {
       viewport: {
         width: window.innerWidth,
         height: window.innerHeight,
-
         latitude: this.props.clickedLocation && this.props.clickedLocation.latitude || this.props.locations[0].latitude,
         longitude: this.props.clickedLocation && this.props.clickedLocation.longitude || this.props.locations[0].longitude,
         zoom: 1
@@ -35,9 +36,9 @@ class Map extends React.Component {
       pinLong: 0,
       pinLat: 0,
       random: 0,
-      showModalAdd: false,
+      renderLocationAdd: false,
       showModalPhotos: false,
-
+      redirect:false,
       locationInfo: null
     };
   }
@@ -83,7 +84,7 @@ class Map extends React.Component {
     window.removeEventListener('resize', this._resize);
   }
 
- 
+
 
 
   // componentDidUpdate(prevProps, prevState) {
@@ -120,19 +121,16 @@ class Map extends React.Component {
   }
 
 
-  hideModalAdd = () => {
-    this.setState({ showModalAdd: false });
-  };
-  hideModalPhotos = () => {
-    this.setState({ showModalPhotos: false });
-  };
 
   // handleStyleLoad = map => (map.resize())
   _onClickMap = (map, evt) => {
+    // console.log(map.lngLat)
     this.setState({ pinLong: parseFloat(map.lngLat[0]) });
     this.setState({ pinLat: parseFloat(map.lngLat[1]) });
-    this.setState({ showModalAdd: true });
-  };
+    this.setState({ renderLocationAdd: true });
+    this.setState({redirect:true})
+    
+}
 
   _onClickPin = location => {
     this.setState({ showModalPhotos: true });
@@ -212,51 +210,74 @@ class Map extends React.Component {
 
   render() {
     const locations = this.props.locations;
+    // console.log(this.state)
     // console.log(this.props.clickedLocation && this.props.clickedLocation.latitude || this.props.locations[0].latitude)
     let { viewport } = this.state
+    let locationAdd = this.state.renderLocationAdd
+    // console.log('map-state', this.state)
+    let applesauce = this.state.redirect && <Redirect to={{
+      pathname: '/home/add_location',
+      linkProps: {
+        long: this.state.pinLong,
+        lat: this.state.pinLat,
+        getLocations: this.props.getLocations,
+        renderLocationAdd: this.state.renderLocationAdd
+      }
+  }} />
+    
     return (
       <div className="map-wrap">
-        <ReactMapGL className="mapb"
-          // key={this.state.random}  
 
-          {...this.state.viewport}
-          mapboxApiAccessToken={MAPBOX_TOKEN}
-          // onViewportChange={this._updateViewport}
-          // onViewportChange={viewport => this._onViewportChange(viewport)}
-          onViewportChange={this._updateViewport}
+        {applesauce}
+   
 
-          mapStyle="mapbox://styles/mapbox/streets-v9"
-          // containerStyle={{ height: "100%", width: "100%" }}
-          //   onStyleLoad={this.handleStyleLoad}
-          attributionControl={false}
-          onClick={this._onClickMap}
-        >
-          {locations && locations.map(this._renderMarker)}
-          {this._renderPopup()}
-          {this.state.pinLong !== 0 && (
-            <Marker longitude={this.state.pinLong} latitude={this.state.pinLat}>
-              <MapPin size={20} />
-            </Marker>
-          )}
-          <div className="nav" style={navStyle}>
-            <NavigationControl className="navigation" onViewportChange={this._updateViewport} />
-          </div>
-        </ReactMapGL> 
+          <ReactMapGL className="mapb"
+            // key={this.state.random}  
 
-        <ModalAddLocation
+            {...this.state.viewport}
+            mapboxApiAccessToken={MAPBOX_TOKEN}
+            // onViewportChange={this._updateViewport}
+            // onViewportChange={viewport => this._onViewportChange(viewport)}
+            onViewportChange={this._updateViewport}
+
+            mapStyle="mapbox://styles/mapbox/streets-v9"
+            // containerStyle={{ height: "100%", wi  // componentDidMount(){
+  //   this.setState({
+  //     latitude:this.props.latitude
+  //   })
+  // }dth: "100%" }}
+            //   onStyleLoad={this.handleStyleLoad}
+            attributionControl={false}
+            onClick={this._onClickMap}
+          >
+            {locations && locations.map(this._renderMarker)}
+            {this._renderPopup()}
+            {this.state.pinLong !== 0 && (
+              <Marker longitude={this.state.pinLong} latitude={this.state.pinLat}>
+                <MapPin size={20} />
+              </Marker>
+            )}
+            <div className="nav" style={navStyle}>
+              <NavigationControl className="navigation" onViewportChange={this._updateViewport} />
+            </div>
+          </ReactMapGL>
+       
+        {/* 
+        <LocationAdd
           show={this.state.showModalAdd}
           handleClose={this.hideModalAdd}
           long={this.state.pinLong}
           lat={this.state.pinLat}
-          getLocations={this.props.getLocations}
-        />
+          getLocations={this.props.getLocations} <Route path={`${this.props.match.path}/add_location`} render={(props) => <div className="locationsListWrapper">{<LocationAdd {...props} />}</div>}/> 
+        /> */}
 
         <ModalShowPhotos
           show={this.state.showModalPhotos}
           handleClose={this.hideModalPhotos}
           locationInfo={this.state.locationInfo}
         />
-      </div>
+        
+      </div >
     );
   }
 }

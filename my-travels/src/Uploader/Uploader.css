@@ -1,22 +1,18 @@
 .uploader {
   width: 90%;
   padding: 2%;
-  margin: 0 auto;
+  margin: 3% auto;
 }
-.addLocationForm {
-  /* display: flex; */
-  justify-content: space-between;
-  flex-direction:row;
-  /* background-color:purple; */
-  height:20%;
-  width:100%;
+.fields {
+  max-height:20%;
 }
 
 
 
-.addLocationForm .field {
+.field {
   /* width:100%; */
-  padding: .5em 0;
+  padding: .25em 0;
+  /* height:.5em */
 }
 
 .addLocationForm input,
@@ -25,12 +21,13 @@
   width: 100%;
   border: 1px solid lightblue;
   border-radius: 8px;
-  padding:.5% 1% ;
+  
+  /* padding:.5% 1% ; */
 }
 
 
 .addLocationForm input[type="text"] {
-  height: 3em;
+  height: 2em;
 }
 
 .addLocationForm textarea {
@@ -50,6 +47,8 @@
   flex-direction: row;
   align-items:flex-end;
   justify-content:space-between;
+  height:10%;
+  font-size:.8em;
 }
 
 .addLocationForm .dropzone,
@@ -60,7 +59,7 @@
 
 .addLocationForm .dropzone {
   width: 60%;
-  height: 15%;
+  height: 10%;
   margin: 1em 0 0 0;
   display:flex;
   justify-content: center;
@@ -82,7 +81,7 @@
 
 .imagePreview{
     display:flex;
-    height:10%;
+    height:8%;
     max-height:20%;
     margin:2% 0;
     flex-wrap:wrap;

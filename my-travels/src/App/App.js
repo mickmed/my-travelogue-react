@@ -8,7 +8,7 @@ import Home from "../Home/Home";
 import Info from "../Info/Info"
 import { Route, Link, Redirect} from "react-router-dom"
 import Test from "../Test/test.js"
-import ModalAddLocation from "../ModalAddLocation/ModalAddLocation"
+import LocationAdd from "../LocationAdd/LocationAdd.js"
 
 class App extends Component {
   state = {
@@ -43,14 +43,14 @@ class App extends Component {
   render() {
 
 
-    console.log(this.state.renderFavsStatus)
+    
     return (
       <div className="App">
         <Header renderList={this.renderList} />
+      
+      
 
-         <Route path="/upload" component={ModalAddLocation}/>
-
-        <Route path="/" render={(props) => <Redirect to={"/home"} {...props}
+        <Route exact path="/" render={(props) => <Redirect to={"/home"} {...props}
           renderFavsStatus={this.state.renderFavsStatus}
           renderDateStatus={this.state.renderDateStatus}
         />} /> 
@@ -61,7 +61,6 @@ class App extends Component {
           renderDateStatus={this.state.renderDateStatus}
         />} />
 
-        {/* <Route path="/homo" component={Homo} /> */}
 
        
 
@@ -69,7 +68,7 @@ class App extends Component {
     );
   }
 }
-// function Homo({ match }) {
+// function Home({ match }) {
 //   console.log(match.url)
 //   return (
 //     <div>

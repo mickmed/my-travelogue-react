@@ -1,7 +1,5 @@
 .modalAddLocation {
-    position: fixed;
-    top: 0;
-    left: 0;
+    
     width:100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
@@ -9,24 +7,19 @@
   }
   
   .modalMainAddLocation {
-    position:fixed; 
+    /* position:fixed;  */
    
     background-image: linear-gradient( rgb(250, 248, 248), rgb(212, 212, 212));
-    width: 80%;
-    height: 95%;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 100%;
+   
   }
   
-  .displayBlockAddLocation {
-    display: block;
-    
-  }
+ .title{
+   font-size:1em;
+ }
   
-  .displayNoneAddLocation {
-    display: none;
-  }
+ 
 
   .toprowAddLocation{
     display:flex;

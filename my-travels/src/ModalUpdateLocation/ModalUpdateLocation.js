@@ -37,8 +37,8 @@ class ModalUpdateLocation extends Component {
       <div className="modalUpdate" >
         <section className="updateModal">
           <p>{'Update Location'}</p>
-          <Uploader  location={this.props.location} handleClose={this.props.handleClose} passer={'modalUpdate'} getLocations={this.props.getLocations}/>
-          <button className="close-button" onClick={this.props.handleClose}>close</button>
+          {/* <Uploader  location={this.props.location} handleClose={this.props.handleClose} passer={'modalUpdate'} getLocations={this.props.getLocations}/> */}
+          <button className="close-button" onClick={this.props.handleClose}>close</button>/>
         
         <form
           className="deleteForm"

@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import './LocationUpdate.css'
+import Uploader from '../Uploader/Uploader.js'
 
 class LocationUpdate extends Component {
   constructor(props) {
     super(props);
-   
+
     this.state = {
       updated: false,
-      city: '',
-      country: '',
-      summary: '',
+      redirect:false,
+      deleting:false,
+      linkProps: this.props && this.props.location.linkProps.location
 
     };
   }
   handleChange = event => {
-      
+
     this.setState({
-        
+
       [event.target.name]: event.target.value
     });
   };
@@ -27,80 +29,104 @@ class LocationUpdate extends Component {
     event.preventDefault();
     this.props.handleClose();
 
-    
+
     let answer = window.confirm('Are you sure you want to edit?');
 
     if (answer === true) {
-   
+
 
       let updateInfo = {
         city: this.state.city,
         country: this.state.country,
         summary: this.state.summary,
-        
+
       };
-      
+
       axios
         .put(
           `http://localhost:3000/locations/${this.props.location.id}`,
           updateInfo
         )
         .then(res => console.log(res.data));
-    } 
+    }
   };
   //component mounts before props from modal are passed, so this is needed to set state for controlled form
-  componentDidUpdate(prevProps){
-      prevProps !== this.props &&  
+  componentDidUpdate(prevProps) {
+    console.log('here')
+    prevProps !== this.props &&
       this.setState({
-        city: this.props.location && this.props.location.city,
-        country: this.props.location && this.props.location.country,
-        summary: this.props.location && this.props.location.summary
-    })
+        city: this.props.location && this.props.location.linkProps.city,
+        country: this.props.location && this.props.location.linkProps.country,
+        summary: this.props.location && this.props.location.linkProps.summary
+      })
   }
+
+
+  deleteLocation = async event => {
+    event.preventDefault();
+    console.log(event.target.value)
+    this.setState({
+      deleting:true
+    })
+    try {
+      const deleteLocation = await axios.delete(
+
+        "https://my-travelogue.herokuapp.com/locations/" +
+          parseInt(event.target.value)
+      )
+
+      .then((res) => this.props.getLocations()
+      
+      )
+      .then((res) => {
+        
+        this.setState({
+          deleting: false,
+          redirect: true
+        })
+        return res
+      })
+     
+    } catch (err) {
+      console.log(err);
+    }
+
+  };
   render() {
-   
+    console.log('update props', this.props)
+    console.log('update state', this.state)
+
+    let redct = this.state.redirect && <Redirect to={'./locations'} />
+    let uploader = this.state.deleting ? '' : <Uploader location={this.state.linkProps} update={true} getLocations={this.props.getLocations} />
     return (
-      <div className="editLocation">
-        {/* <h2 className="title">Edit Location</h2> */}
-        <form onChange={this.handleChange} onSubmit={this.handleEdit} id="changeForm">
-          <div className="field">
-            {/* <label className="city">City: </label> */}
-            <input
-              type="text"
-              placeholder="City"
-              name="city"
-              value={this.state.city && this.state.city || ''}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="field">
-            {/* <label className="country">Country </label> */}
-            <input
-              type="text"
-              placeholder="country"
-              name="country"
-              value={this.state.country || ''}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="field">
-            {/* <label className="name">Summary: </label> */}
-            <textarea
-              type="text"
-              placeholder="Summary"
-              name="summary"
-              value={this.state.summary || ''}
-              onChange={this.handleChange}
-            />
+      <div className={"modalAddLocation"}>
+        <section className="modalMainAddLocation">
+          <div className="toprowAddLocation">
+            <h1 className="title">Edit location</h1>
+            {redct}
+          
+          
+            <button className="deleteButton" onClick={(e)=>this.deleteLocation(e)} name="delete" value={this.props.location && this.props.location.linkProps.location.id}>
+                {this.state.deleting ? '...deleting' : 'Delete'}
+            </button>
+         
+            <Link to="/home">
+              <button>
+                close
+              </button>
+            </Link>
+
           </div>
 
-          <button value="Submit" className="submit-btn" onClick={this.handleEdit}>
-            Update
-          </button>
-        </form>
+          {uploader}
+          
+
+        </section>
       </div>
     );
   }
 }
 
 export default LocationUpdate;
+
+

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom'
 import Dropzone from "react-dropzone";
 import "./Uploader.css";
 import Axios from "axios";
@@ -13,12 +14,22 @@ class Uploader extends Component {
       city: this.props.location && this.props.location.city,
       country: this.props.location && this.props.location.country,
       summary: this.props.location && this.props.location.summary,
+      latitude: this.props.lat,
+      longitude: this.props.long,
       images: this.props.location && this.props.location.images || [],
-      images_new: [], 
+      images_new: [],
       previewImages: [],
-      submitted: false
+      submitted: false,
+      redirect: false,
+      uploading:false
     };
   }
+
+  // componentDidMount(){
+  //   this.setState({
+  //     latitude:this.props.latitude
+  //   })
+  // }
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -26,8 +37,9 @@ class Uploader extends Component {
   };
 
   handleUpdate = async event => {
+    console.log('here')
     event.preventDefault();
-    this.setState({uploading:true})
+    this.setState({ uploading: true })
 
     return (
       await Axios.put(
@@ -47,80 +59,108 @@ class Uploader extends Component {
           }
         }
       )
-        .then((res) => this.props.getLocations())
-        .then((res) => this.props.handleClose())    
-        .then((res) => this.setState({uploading: false}))
-
+      .then((res) => this.props.getLocations()
+      )
+      .then((res) => {
+        this.setState({
+          uploading:false,
+          redirect: true
+        })
+        return res
+      })
 
     );
   }
 
 
- handleSubmit = async event => {
-    event.preventDefault();
-    this.props.handleClose();
+  handleSubmit = async event => {
+    event.preventDefault()
+    this.setState({uploading:true})
+    const { city, country, summary, latitude, longitude, images } = this.state
+    console.log('before condition')
+    console.log(city, country, summary, latitude, longitude, images)
+    if (city && country && summary && latitude && longitude && images) {
 
-    //sending data to server
-    return (
-      await Axios.post(
-        "https://my-travelogue.herokuapp.com/locations",
-        {
-          city: this.state.city,
-          country: this.state.country,
-          summary: this.state.summary,
-          latitude: this.props.lat,
-          longitude: this.props.long,
-          images: this.state.images
-        },
+      console.log('after condition')
+      //sending data to server
+      return (
+        await Axios.post(
+          "https://my-travelogue.herokuapp.com/locations",
+          {
+            city: this.state.city,
+            country: this.state.country,
+            summary: this.state.summary,
+            latitude: this.props.lat,
+            longitude: this.props.long,
+            images: this.state.images
+          },
 
-        {
-          headers: {
-            "Content-Type": "application/json"
+          {
+            headers: {
+              "Content-Type": "application/json"
+            }
           }
-        }
+        )
+          .then((res) => this.props.getLocations()
+          )
+          .then((res) => {
+            this.setState({
+              uploading:false,
+              redirect: true
+            })
+            return res
+          })
+
+          .then((res) => console.log('res', res))
+
+
+
+
       )
-        .then((res) => this.props.getLocations())
-    );
-  };
+    }
+  }
+
+
 
   // https://stackoverflow.com/questions/36280818/how-to-convert-file-to-base64-in-javascript
   // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
   //accepted - array of imgs
   onDrop = accepted => {
-   
-    let previewImages = [];
-    previewImages.push(this.state.images)
-   
-    for (let i in accepted) {
-      previewImages.push({ accepted });
-    }
-    
-    this.setState({ previewImages: previewImages });
+
+    // let previewImages = [];
+    // previewImages.push(this.state.images)
+
+    // for (let i in accepted) {
+    //   previewImages.push({ accepted });
+    // }
+
+    // this.setState({ previewImages: previewImages });
     accepted.forEach(file => {
+      console.log(file)
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-          this.setState(state => ({
-            images: [
-              ...state.images,
-              {                
-                name: file.name,
-                imageBase64: reader.result,
-                locationId: this.state.id
-              }
-            ]
-          })) 
+        this.setState(state => ({
+          images: [
+            ...state.images,
+            {
+              name: file.name,
+              imageBase64: reader.result,
+              locationId: this.state.id
+            }
+          ]
+        }))
 
-          console.log(reader.result)
-         this.setState(state => ({
-            images_new: [
-              ...state.images_new,
-              {
-                name: file.name,
-                imageBase64: reader.result,
-                locationId: this.state.id
-              }
-            ]
-          })) 
+        // console.log(reader.result)
+        this.setState(state => ({
+          images_new: [
+            ...state.images_new,
+            {
+              name: file.name,
+              imageBase64: reader.result,
+              locationId: this.state.id
+            }
+          ]
+        }))
       });
       reader.readAsDataURL(file);
     });
@@ -130,34 +170,34 @@ class Uploader extends Component {
   deletePhoto = async (e) => {
     let id = e.target.getAttribute('id')
     let name = e.target.getAttribute('value')
-   
-    try{
-      const deleteImage = await Axios.delete('https://my-travelogue.herokuapp.com/images/' + id)
-      
-      let images = this.state.images.filter((elem)=>{
-        
-        if(elem.name !== name){
-          
-          return e
-        }
-      })
-      this.setState({images: images})
 
-      let images_new = this.state.images_new.filter((elem)=>{
-      
-        if(elem.name !== name){
-          
-          
+    try {
+      const deleteImage = await Axios.delete('https://my-travelogue.herokuapp.com/images/' + id)
+
+      let images = this.state.images.filter((elem) => {
+
+        if (elem.name !== name) {
+
           return e
         }
       })
-       this.setState({images_new: images_new})
-          
-      
+      this.setState({ images: images })
+
+      let images_new = this.state.images_new.filter((elem) => {
+
+        if (elem.name !== name) {
+
+
+          return e
+        }
+      })
+      this.setState({ images_new: images_new })
+
+
       // console.log(images, images_new);
-      
+
     }
-    catch(err){
+    catch (err) {
       console.log(err)
     }
   }
@@ -165,11 +205,15 @@ class Uploader extends Component {
   render() {
     const { images } = this.state;
     const hasImages = images.length > 0;
-    // console.log(this.props)
 
+    console.log('uploader props', this.props)
+    console.log('uploader State', this.state)
+   
+    const redirectToList = this.state.redirect && <Redirect to={'./locations'} />
     return (
       <div className="uploader">
-        <form className="addLocationForm" onSubmit={this.props.passer === "modalUpdate" ? this.handleUpdate : this.handleSubmit}>
+        {redirectToList}
+        <form className="addLocationForm" onSubmit={this.props.update === true ? this.handleUpdate : this.handleSubmit}>
           <div className="fields">
             <div className="field">
               {/* <label className="name">City: </label> */}
@@ -194,7 +238,7 @@ class Uploader extends Component {
             <div className="field">
               {/* <label className="summary">Summary: </label> */}
               <textarea
-                placeholder={this.props.passer === 'modalUpdate' ? this.state.summary : "Country"}
+                placeholder={this.props.passer === 'modalUpdate' ? this.state.summary : "Description"}
                 name="summary"
                 value={this.state.summary}
                 onChange={this.handleChange}
@@ -221,10 +265,10 @@ class Uploader extends Component {
                     </div>
                   );
                 }}
-              </Dropzone>  
+              </Dropzone>
 
               <div className="button">
-                <button type="submit">{this.state.uploading?'...loading':'Submit'}</button>
+                <button type="submit">{this.state.uploading ? '...uploading' : 'Submit'}</button>
               </div>
             </div>
             {hasImages && (
@@ -233,7 +277,7 @@ class Uploader extends Component {
                   <div className="img-wrapper">
 
                     <img key={index} src={image.imageBase64} />
-                    <i className="fas fa-times-circle" onClick={this.deletePhoto} name="name" id={image.id}value={image.name}></i>
+                    <i className="fas fa-times-circle" onClick={this.deletePhoto} name="name" id={image.id} value={image.name}></i>
                   </div>
                 ))}
               </div>

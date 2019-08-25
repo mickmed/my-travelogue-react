@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
 import "./LocationList.css";
 import ModalUpdateLocation from "../ModalUpdateLocation/ModalUpdateLocation"
 let faves = []
@@ -92,7 +93,7 @@ class LocationsList extends Component {
   }
 
   renderClickedLocation = (location) => {
-    console.log(location)
+    // console.log(location)
     this.props.clickedLocation(location)
     this.setState({ClickedLocation:location})
     
@@ -126,8 +127,17 @@ class LocationsList extends Component {
             <span className='favStar' name={'name'} value={location.city} onClick={() => this.favClick(location)}> {this.state.faves && this.state.faves.includes(location) ? <span>🌟</span> : <span>⭐</span>}
             </span>
 
-            <span className='pencil' name={'name'} value={location.city} onClick={() => this.showModalUpdate(location)}><span>✏️</span>
-            </span>
+            <Link to={{
+              pathname:'/home/update_location',
+              linkProps:{
+                location:location
+              }
+            }}>
+            
+            
+            
+            <span className='pencil' name={'name'} value={location.city}><span>🖋</span>
+            </span></Link>
 
             <span className='pencil' name={'name'} value={location.city} onClick={() => this.showModalUpdate(location)}><span>📖</span>
             </span>
@@ -159,6 +169,8 @@ class LocationsList extends Component {
     let locationsTemp = [...this.state.locations]
     // console.log('state.loc', this.state.locations)
     // console.log(locationsTemp)
+    console.log('locations props', this.props)
+    console.log('locations state', this.state)
     return (
       <div className="locationsList">
 
