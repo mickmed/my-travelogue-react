@@ -1,9 +1,7 @@
 import React from "react";
 import ReactMapGL, { Marker, Popup, NavigationControl } from "react-map-gl";
-
 import MapPin from "./MapPin";
 import LocationInfo from "./LocationInfo.js";
-import LocationAdd from "../LocationAdd/LocationAdd";
 import ModalShowPhotos from "../ModalShowPhotos/ModalShowPhotos";
 import "./Map.css"
 import { Redirect, Link } from 'react-router-dom'
@@ -19,12 +17,9 @@ const navStyle = {
 };
 const screenWidth = window.innerWidth
 
-
-
 class Map extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       viewport: {
         width: window.innerWidth,
@@ -37,29 +32,21 @@ class Map extends React.Component {
       pinLat: 0,
       random: 0,
       renderLocationAdd: false,
-      showModalPhotos: false,
-      redirect:false,
+      showpics: false,
+      redirect: false,
       locationInfo: null
     };
   }
 
   componentDidMount() {
-    // console.log('here')
     const AppDims = document.querySelector(".App")
-    // const AppHeight = document.querySelector(".App")
-    // console.log(AppDims.offsetWidth)
-    // console.log(AppDims.offsetHeight, AppDims.offsetWidth)
     if (AppDims.offsetWidth < 900 && AppDims.offsetWidth < AppDims.offsetHeight) {
-
-
       this.setState({
         viewport: {
           ...this.state.viewport,
           width: '100%',
           height: AppDims.offsetHeight / 2 + 'px',
           appDims: AppDims,
-
-
         }
       })
     }
@@ -70,9 +57,6 @@ class Map extends React.Component {
           width: '100%',
           height: AppDims.offsetHeight / 1.25 + 'px',
           appDims: AppDims,
-
-
-
         }
       })
     }
@@ -84,25 +68,6 @@ class Map extends React.Component {
     window.removeEventListener('resize', this._resize);
   }
 
-
-
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log( this.props.clickedLocation && this.props.clickedLocation.latitude)
-  //   if (prevProps !== this.props) {
-  //     prevProps.clickedLocation &&
-  //       this.setState({
-  //         viewport: {
-  //           ...this.state.viewport,
-  //           latitude: this.props.clickedLocation && this.props.clickedLocation.latitude,
-  //           longitude: this.props.clickedLocation && this.props.clickedLocation.longitude
-
-
-  //         }
-  //       })
-  //   }
-  // }
-
   static getDerivedStateFromProps(nextProps, prevState) {
     // console.log(nextProps.clickedLocation && nextProps.clickedLocation.latitude, prevState.viewport.latitude)
     if (nextProps.clickedLocation && nextProps.clickedLocation.latitude !== prevState.viewport.latitude) {
@@ -111,29 +76,23 @@ class Map extends React.Component {
           ...prevState.viewport,
           latitude: nextProps.clickedLocation && nextProps.clickedLocation.latitude,
           longitude: nextProps.clickedLocation && nextProps.clickedLocation.longitude
-
-
         }
-      }) // <- this is setState equivalent
+      })
     }
-
-
   }
-
-
 
   // handleStyleLoad = map => (map.resize())
   _onClickMap = (map, evt) => {
-    // console.log(map.lngLat)
+    console.log(map.lngLat)
     this.setState({ pinLong: parseFloat(map.lngLat[0]) });
     this.setState({ pinLat: parseFloat(map.lngLat[1]) });
     this.setState({ renderLocationAdd: true });
-    this.setState({redirect:true})
-    
-}
+    this.setState({ redirect: true })
+  }
 
   _onClickPin = location => {
-    this.setState({ showModalPhotos: true });
+
+    this.setState({ showpics: true });
     this.setState({ locationInfo: location });
   };
 
@@ -184,12 +143,7 @@ class Map extends React.Component {
     );
   }
 
-  // _updateViewport = viewport => {
-
-  //   // const {width, height, ...etc} = viewport
-  //   // console.log(width, height, etc)
-  //   this.setState({ viewport: viewport })
-  // };
+  
   _onViewportChange = (viewport) => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
@@ -210,12 +164,9 @@ class Map extends React.Component {
 
   render() {
     const locations = this.props.locations;
-    // console.log(this.state)
-    // console.log(this.props.clickedLocation && this.props.clickedLocation.latitude || this.props.locations[0].latitude)
     let { viewport } = this.state
     let locationAdd = this.state.renderLocationAdd
-    // console.log('map-state', this.state)
-    let applesauce = this.state.redirect && <Redirect to={{
+    let redirect = this.state.redirect && <Redirect to={{
       pathname: '/home/add_location',
       linkProps: {
         long: this.state.pinLong,
@@ -223,60 +174,47 @@ class Map extends React.Component {
         getLocations: this.props.getLocations,
         renderLocationAdd: this.state.renderLocationAdd
       }
-  }} />
-    
+    }} />
+
+    let showpics = this.state.showpics &&
+      <Redirect to={{
+        pathname: "/showpics",
+        locationInfo: this.state.locationInfo,
+               
+      }} />
+
     return (
       <div className="map-wrap">
+        {redirect}
+        <ReactMapGL className="mapb"
+          {...this.state.viewport}
+          mapboxApiAccessToken={MAPBOX_TOKEN}
+          // onViewportChange={this._updateViewport}
+          // onViewportChange={viewport => this._onViewportChange(viewport)}
+          onViewportChange={this._updateViewport}
 
-        {applesauce}
-   
-
-          <ReactMapGL className="mapb"
-            // key={this.state.random}  
-
-            {...this.state.viewport}
-            mapboxApiAccessToken={MAPBOX_TOKEN}
-            // onViewportChange={this._updateViewport}
-            // onViewportChange={viewport => this._onViewportChange(viewport)}
-            onViewportChange={this._updateViewport}
-
-            mapStyle="mapbox://styles/mapbox/streets-v9"
-            // containerStyle={{ height: "100%", wi  // componentDidMount(){
-  //   this.setState({
-  //     latitude:this.props.latitude
-  //   })
-  // }dth: "100%" }}
-            //   onStyleLoad={this.handleStyleLoad}
-            attributionControl={false}
-            onClick={this._onClickMap}
-          >
-            {locations && locations.map(this._renderMarker)}
-            {this._renderPopup()}
-            {this.state.pinLong !== 0 && (
-              <Marker longitude={this.state.pinLong} latitude={this.state.pinLat}>
-                <MapPin size={20} />
-              </Marker>
-            )}
-            <div className="nav" style={navStyle}>
-              <NavigationControl className="navigation" onViewportChange={this._updateViewport} />
-            </div>
-          </ReactMapGL>
-       
-        {/* 
-        <LocationAdd
-          show={this.state.showModalAdd}
-          handleClose={this.hideModalAdd}
-          long={this.state.pinLong}
-          lat={this.state.pinLat}
-          getLocations={this.props.getLocations} <Route path={`${this.props.match.path}/add_location`} render={(props) => <div className="locationsListWrapper">{<LocationAdd {...props} />}</div>}/> 
-        /> */}
-
-        <ModalShowPhotos
+          mapStyle="mapbox://styles/mapbox/streets-v9"
+          attributionControl={false}
+          onClick={this._onClickMap}
+        >
+          {locations && locations.map(this._renderMarker)}
+          {this._renderPopup()}
+          {this.state.pinLong !== 0 && (
+            <Marker longitude={this.state.pinLong} latitude={this.state.pinLat}>
+              <MapPin size={20} />
+            </Marker>
+          )}
+          <div className="nav" style={navStyle}>
+            <NavigationControl className="navigation" onViewportChange={this._updateViewport} />
+          </div>
+        </ReactMapGL>
+        {showpics}
+        {/* <ModalShowPhotos
           show={this.state.showModalPhotos}
           handleClose={this.hideModalPhotos}
           locationInfo={this.state.locationInfo}
-        />
-        
+        /> */}
+
       </div >
     );
   }

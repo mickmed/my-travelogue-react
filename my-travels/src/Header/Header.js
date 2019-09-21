@@ -9,7 +9,7 @@ const Header = (props) => {
   return (
     <header>
       <nav>
-        <a href="./">Travelogue</a>
+        <a href="./">My Travelogue</a>
         {/* <span>pin your memories to the map</span> */}
 
         <div className='header_icons'>

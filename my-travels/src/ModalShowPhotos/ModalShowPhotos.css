@@ -12,21 +12,17 @@
   .modalMainShowPhotos {
     position:fixed; 
    
-    background-image: linear-gradient( rgb(250, 248, 248), rgb(212, 212, 212));
-    width: 90%;
-    height: 100%;
-    top:45%;
+    /* background-image: linear-gradient( rgb(250, 248, 248), rgb(212, 212, 212)); */
+    
+    background: black;
+    width: 96%;
+    height: 90%;
+    /* top:45%;
     left:50%;
-    transform: translate(-50%,-45%);
+    transform: translate(-50%,-45%); */
   }
   
-  .displayBlockShowPhotos {
-    display: block;
-  }
-  
-  .displayNoneShowPhotos {
-    display: none;
-  }
+
   
   .toprowShowPhotos {
     display:flex;

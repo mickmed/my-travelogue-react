@@ -72,6 +72,8 @@ class Home extends Component {
         {this.state.loading == false && "...loading"}
         {this.state.loading == true && (
           <div className="homeComponent">
+
+            
             <div className="mapWrapper">
               <Map
                 className="map"
