@@ -75,16 +75,16 @@ img {
 
 }
 
-.heart{
+
+
+.blueheart, .greenheart{
   font-size:15px;
+  margin-left:30%;
+}
+.blueheart{
   opacity:.7;
 }
   
-
 .greenheart{
-  font-size:15px;
   opacity:.25;
-  transform:translateX(30px);
-  /* background:purple; */
-  margin-left:30%;
 }

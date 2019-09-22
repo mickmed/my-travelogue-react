@@ -39,7 +39,7 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    console.log('cdm')
+    // console.log('cdm')
     const AppDims = document.querySelector(".App")
     if (AppDims.offsetWidth < 900 && AppDims.offsetWidth < AppDims.offsetHeight) {
       this.setState({
@@ -71,7 +71,7 @@ class Map extends React.Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     // console.log(nextProps.clickedLocation && nextProps.clickedLocation.latitude, prevState.viewport.latitude)
-    console.log(nextProps, prevState)
+    // console.log(nextProps, prevState)
     if (nextProps.clickedLocation && nextProps.clickedLocation.latitude !== prevState.viewport.latitude) {
       return ({
         viewport: {
@@ -81,10 +81,10 @@ class Map extends React.Component {
         }
       })
     }
-    console.log(nextProps, prevState)
-    if(nextProps.clickedLocation && nextProps.clickedLocation.id !== prevState.location.id){
-      console.log('here')
-    }
+    // console.log(nextProps, prevState)
+    // if(nextProps.clickedLocation && nextProps.clickedLocation.id !== prevState.location.id){
+    //   console.log('here')
+    // }
   }
   handleClose=()=>{
     this.setState({
@@ -193,7 +193,7 @@ class Map extends React.Component {
         handleClose:this.handleClose
                
       }} />
-      console.log(this.state.loc)
+      // console.log(this.state.loc)
 
     return (
       <div className="map-wrap">

@@ -115,18 +115,14 @@ class LocationsList extends Component {
           className={`location`}
           onClick={() => this.renderClickedLocation(location)}
         >
-
           <div className='left-panel'>
             <p className="location-name">
               {location.city + ' '}
-
             </p>
-
-
 
             <div className='icons'>
               <span className='icons-wrapper'>
-                <span className='favStar' name={'name'} value={location.city} onClick={() => this.favClick(location)}> {this.state.faves && this.state.faves.includes(location) ? <span className="heart">💙</span> : <span className="greenheart">💚</span>}
+                <span className='favStar' name={'name'} value={location.city} onClick={() => this.favClick(location)}> {this.state.faves && this.state.faves.includes(location) ? <span className="blueheart">💙</span> : <span className="greenheart">💚</span>}
                 </span>
 
                 <Link to={{
@@ -171,8 +167,8 @@ class LocationsList extends Component {
     let locationsTemp = [...this.state.locations]
     // console.log('state.loc', this.state.locations)
     // console.log(locationsTemp)
-    console.log('locations props', this.props)
-    console.log('locations state', this.state)
+    // console.log('locations props', this.props)
+    // console.log('locations state', this.state)
     return (
       <div className="locationsList">
 
@@ -185,14 +181,14 @@ class LocationsList extends Component {
         {!this.props.renderFavsStatus && !this.props.renderDateStatus &&
           this.renderAll(this.state.locations)}
 
-        {this.state.showModalUpdate ?
+        {/* {this.state.showModalUpdate ?
           <ModalUpdateLocation
             handleClose={this.showModalUpdate}
             location={this.state.location}
             getLocations={this.props.getLocations}
           >
 
-          </ModalUpdateLocation> : null}
+          </ModalUpdateLocation> : null} */}
       </div>
     );
   }

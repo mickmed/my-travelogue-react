@@ -47,7 +47,7 @@ class Home extends Component {
   }
 
   componentDidMount = async () => {
-    console.log('here')
+    console.log('home cdm')
     await this.getLocations();
   };
 
