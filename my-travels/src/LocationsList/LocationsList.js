@@ -21,7 +21,7 @@ class LocationsList extends Component {
     this.setState({ location: arr })
 
   };
-  
+
 
   favClick = (loc) => {
     console.log(loc)
@@ -37,7 +37,7 @@ class LocationsList extends Component {
   }
 
   renderFaves = (locations, faves) => {
-   
+
     // console.log(locations, faves)
     return (
       locations &&
@@ -52,7 +52,7 @@ class LocationsList extends Component {
 
   renderDateOrder = (locationsTemp) => {
 
-    console.log('locTemp',locationsTemp)
+    console.log('locTemp', locationsTemp)
     let locationsOrder = locationsTemp
     console.log(locationsOrder)
     function compare(a, b) {
@@ -83,7 +83,7 @@ class LocationsList extends Component {
 
 
   renderAll = (locations) => {
-   
+
     return (
       locations &&
       locations.map((location, index) => (
@@ -95,73 +95,75 @@ class LocationsList extends Component {
   renderClickedLocation = (location) => {
     // console.log(location)
     this.props.clickedLocation(location)
-    this.setState({ClickedLocation:location})
-    
-    
+    this.setState({ ClickedLocation: location })
+
+
   }
 
   renderList = (location, index) => {
-    
+
     let className
-    if(this.state.ClickedLocation === location){
+    if (this.state.ClickedLocation === location) {
       className = "clickedLocation"
-     
-    } 
 
-    return(
-      <div
-      
-      key={index}
-      className={`location ${className}`}
-      onClick={() => this.renderClickedLocation(location)}
+    }
 
-    >
-      
-      <div className='left-panel'>
-        <p className="location-name">
-          {location.city}
-        </p>
+    return (
+      <div className="location-wrapper">
+        <div
+          key={index}
+          className={`location`}
+          onClick={() => this.renderClickedLocation(location)}
+        >
 
-        <div className='icons'>
-          <span className='icons-wrapper'>
-            <span className='favStar' name={'name'} value={location.city} onClick={() => this.favClick(location)}> {this.state.faves && this.state.faves.includes(location) ? <span>🌟</span> : <span>⭐</span>}
-            </span>
+          <div className='left-panel'>
+            <p className="location-name">
+              {location.city + ' '}
 
-            <Link to={{
-              pathname:'/home/update_location',
-              linkProps:{
-                location:location
-              }
-            }}>
-            
-            
-            
-            <span className='pencil' name={'name'} value={location.city}><span>🖋</span>
-            </span></Link>
-
-            <span className='pencil' name={'name'} value={location.city} onClick={() => this.showModalUpdate(location)}><span>📖</span>
-            </span>
+            </p>
 
 
-          </span>
+
+            <div className='icons'>
+              <span className='icons-wrapper'>
+                <span className='favStar' name={'name'} value={location.city} onClick={() => this.favClick(location)}> {this.state.faves && this.state.faves.includes(location) ? <span className="heart">💙</span> : <span className="greenheart">💚</span>}
+                </span>
+
+                <Link to={{
+                  pathname: '/home/update_location',
+                  linkProps: {
+                    location: location
+                  }
+                }}>
+
+                  {/* <span className='pencil' name={'name'} value={location.city}><span>🖋</span>
+                </span> */}
+                </Link>
+
+                {/* <span className='pencil' name={'name'} value={location.city} onClick={() => this.showModalUpdate(location)}><span>📖</span>
+              </span> */}
+              </span>
+            </div>
+          </div>
           <span className="stubborn">{location.country}</span>
         </div>
+        <img
+          src={
+            location.images[0].imageBase64 &&
+            location.images[0].imageBase64
+          }
+          alt={location.images[0].name}
+        />
+
       </div>
-      <img
-        src={
-          location.images[0].imageBase64 &&
-          location.images[0].imageBase64
-        }
-        alt={location.images[0].name}
-      />
-    </div >
-  
+
+
 
 
     )
   }
-  
-   
+
+
   render() {
     const { locations } = this.props;
     // console.log('fav', this.props.renderFavsStatus)
@@ -175,13 +177,13 @@ class LocationsList extends Component {
       <div className="locationsList">
 
         {this.props.renderFavsStatus &&
-          this.state.faves && this.state.faves && this.renderFaves(locationsTemp, this.state.faves && this.state.faves)}  
+          this.state.faves && this.state.faves && this.renderFaves(locationsTemp, this.state.faves && this.state.faves)}
 
         {this.props.renderDateStatus &&
           this.renderDateOrder(locationsTemp)}
 
-        {!this.props.renderFavsStatus && !this.props.renderDateStatus && 
-        this.renderAll(this.state.locations)}
+        {!this.props.renderFavsStatus && !this.props.renderDateStatus &&
+          this.renderAll(this.state.locations)}
 
         {this.state.showModalUpdate ?
           <ModalUpdateLocation

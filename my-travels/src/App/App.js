@@ -4,7 +4,7 @@ import "./App.css";
 import Header from "../Header/Header"
 import Map from "../Map/Map";
 import LocationsList from "../LocationsList/LocationsList";
-import ModalShowPhotos from "../ModalShowPhotos/ModalShowPhotos"
+import ShowPhotos from "../ShowPhotos/ShowPhotos"
 import Home from "../Home/Home";
 import Info from "../Info/Info"
 import { Route, Link, Redirect, Switch } from "react-router-dom"
@@ -63,7 +63,7 @@ class App extends Component {
               renderDateStatus={this.state.renderDateStatus}
             />} />
             <Route exact path="/test" component={Test} />
-            <Route exact path="/showpics" component={ModalShowPhotos} />
+            <Route exact path="/showpics" component={ShowPhotos} />
 
 
         </div>

@@ -1,9 +1,9 @@
 import React from "react";
-import "./ModalShowPhotos.css";
+import "./ShowPhotos.css";
 import SimpleSlider from "../SimpleSlider/SimpleSlider";
 import {Redirect} from "react-router-dom"
 
-class Modal extends React.Component{
+class ShowPhotos extends React.Component{
   state={
     redirect: false
   }
@@ -20,10 +20,10 @@ render(){
   let redirect = this.state.redirect && <Redirect to={"/home"}/>
   return (
     <div >
-      <section className="modalMainShowPhotos">
+      <section className="show-photos">
         <button onClick={this.handleRedirect}>close</button>
         <SimpleSlider locationInfo={this.props.location.locationInfo} />
-        <div>{'hello'}</div>
+     
       </section>
       {redirect}
     </div>
@@ -31,4 +31,4 @@ render(){
 }
 };
 
-export default Modal;
+export default ShowPhotos;

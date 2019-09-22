@@ -47,9 +47,10 @@ class Home extends Component {
   }
 
   componentDidMount = async () => {
-    // console.log('here')
+    console.log('here')
     await this.getLocations();
   };
+
 
 
 
@@ -73,7 +74,7 @@ class Home extends Component {
         {this.state.loading == true && (
           <div className="homeComponent">
 
-            
+
             <div className="mapWrapper">
               <Map
                 className="map"
@@ -90,15 +91,12 @@ class Home extends Component {
             <Route path={`${this.props.match.path}/add_location`} render={(props) => <div className="locationsListWrapper">{<LocationAdd {...props} />}</div>}/> 
 
             <Route path={`${this.props.match.path}/locations`} render={() => <div className="locationsListWrapper">{locationsList}</div>}/> 
+
             <Route path={`${this.props.match.path}/info`} render={() => <div className="locationsListWrapper"> <Info/></div>}/> 
             <Route
               exact
               path={this.props.match.path}
-
               render={() => <div className="locationsListWrapper">{locationsList}</div>}/> 
-
-
-
           </div>
         )}
       </div>

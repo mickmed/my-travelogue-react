@@ -1,11 +1,11 @@
 
 header{
     font-family: 'Archivo';
-    font-weight:lighter;
+    /* font-weight:lighter; */
     /* background-color:rgb(175, 11, 11); */
     height:55px;
     color: white;
-    font-size:1.5em;
+    font-size:1.7em;
     padding:0 2%;
     background-image:linear-gradient(to left,red,red, red);
 }
@@ -19,7 +19,7 @@ nav{
 header nav a{
     text-decoration:none;
     color:white;
-    transform:translateY(.55em);
+    transform:translateY(.45em);
 }
 
 
