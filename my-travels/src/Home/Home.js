@@ -41,7 +41,7 @@ class Home extends Component {
   };
 
   getClickedLocation = (location) => {
-   
+
     console.log(location)
     this.setState({ clickedLocation: location })
   }
@@ -58,10 +58,14 @@ class Home extends Component {
     //  console.log('home', this.state.locations)
     const { images } = this.state;
     const hasImages = images.length > 0;
- 
-    const locationsList = 
 
-      <LocationsList key={this.state.locations} locations={this.state.locations} renderFavsStatus={this.props.renderFavsStatus} renderDateStatus={this.props.renderDateStatus}
+    const locationsList =
+
+      <LocationsList
+        key={this.state.locations} 
+        locations={this.state.locations} 
+        renderFavsStatus={this.props.renderFavsStatus} 
+        renderDateStatus={this.props.renderDateStatus}
         getLocations={this.getLocations}
         clickedLocation={this.getClickedLocation} />
 
@@ -85,18 +89,18 @@ class Home extends Component {
               />
             </div>
 
-           
-            <Route path={`${this.props.match.path}/update_location`} render={(props) => <div className="locationsListWrapper">{<LocationUpdate {...props} getLocations={this.getLocations} />}</div>}/> 
 
-            <Route path={`${this.props.match.path}/add_location`} render={(props) => <div className="locationsListWrapper">{<LocationAdd {...props} />}</div>}/> 
+            <Route path={`${this.props.match.path}/update_location`} render={(props) => <div className="locationsListWrapper">{<LocationUpdate {...props} getLocations={this.getLocations} />}</div>} />
 
-            <Route path={`${this.props.match.path}/locations`} render={() => <div className="locationsListWrapper">{locationsList}</div>}/> 
+            <Route path={`${this.props.match.path}/add_location`} render={(props) => <div className="locationsListWrapper">{<LocationAdd {...props} />}</div>} />
 
-            <Route path={`${this.props.match.path}/info`} render={() => <div className="locationsListWrapper"> <Info/></div>}/> 
+            <Route path={`${this.props.match.path}/locations`} render={() => <div className="locationsListWrapper">{locationsList}</div>} />
+
+            <Route path={`${this.props.match.path}/info`} render={() => <div className="locationsListWrapper"> <Info /></div>} />
             <Route
               exact
               path={this.props.match.path}
-              render={() => <div className="locationsListWrapper">{locationsList}</div>}/> 
+              render={() => <div className="locationsListWrapper">{locationsList}</div>} />
           </div>
         )}
       </div>

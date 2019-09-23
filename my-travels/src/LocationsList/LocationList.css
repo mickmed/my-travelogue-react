@@ -3,13 +3,11 @@
   overflow-y: auto;
   
 }
-.locationsList{
-  /* max-height:10em; */
-}
+
 
 .location-wrapper{
   display:flex;
-  /* width:100%; */
+  width:100%;
   justify-content:space-between;
   background-image: linear-gradient(to bottom, rgb(238, 236, 236), rgb(249, 252, 252, .5));
   margin-bottom:2%;
@@ -21,7 +19,7 @@
   /* justify-content: space-between; */
   /* align-items: center; */
   font-family: 'Comfortaa', cursive;
-  font-size: .75em;
+  font-size: 1em;
   margin-block-start:0;
   
     /* border-bottom:.3px solid rgb(249, 252, 252); */
@@ -31,20 +29,20 @@
 }
 
 .clickedLocation{
-  background-image: linear-gradient(rgb(225, 231, 248),lightblue
+  background-image: linear-gradient(rgb(171, 230, 250), rgb(225, 231, 248)
   );
   /* box-shadow: .25px .25px black; */
 
 }
 
 .location-name{
-  font-size: 1.2em;
+  font-size: 1em;
   margin:0;
   margin-bottom:8%;
 }
 
 .stubborn {
-  font-size: .9em;
+  font-size: .7em;
   font-family:'Comfortaa';
 }
 

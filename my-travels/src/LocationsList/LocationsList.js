@@ -109,7 +109,7 @@ class LocationsList extends Component {
     }
 
     return (
-      <div className="location-wrapper">
+      <div className={`location-wrapper ${className}`}>
         <div
           key={index}
           className={`location`}
