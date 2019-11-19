@@ -26,7 +26,7 @@ class Home extends Component {
   getLocations = async (req, res) => {
 
     try {
-      const fetchLocations = await Axios("https://my-travelogue.herokuapp.com/locations");
+      const fetchLocations = await Axios("https://my-travelogue.herokuapp.com/locations/");
       // console.log(fetchLocations)
       const locations = fetchLocations.data;
       this.setState({
@@ -34,10 +34,13 @@ class Home extends Component {
         loading: true,
         clickedLocation: null
       });
-      // console.log(locations)
+      console.log(locations)
     } catch (err) {
       console.log(err);
     }
+
+   
+    
   };
 
   getClickedLocation = (location) => {
